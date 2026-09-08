@@ -3,7 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lutherking | IT Expert</title>
+    <meta name="description" content="Portfolio of Luther Mwinuka, a Full Stack Developer and IT Expert building reliable web applications and digital solutions.">
+    <meta name="keywords" content="Luther Mwinuka, full stack developer, IT expert, web developer, Tanzania, software developer">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="/">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="/">
+    <meta property="og:title" content="Luther Mwinuka | Full Stack Developer & IT Expert">
+    <meta property="og:description" content="Explore Luther Mwinuka's portfolio, projects, skills, and professional certifications.">
+    <meta property="og:image" content="photo/luther.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Luther Mwinuka | Full Stack Developer & IT Expert">
+    <meta name="twitter:description" content="Portfolio, projects, skills, and certifications.">
+    <meta name="twitter:image" content="photo/luther.jpg">
+    <title>Luther Mwinuka | Full Stack Developer & IT Expert</title>
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="assets/fontawesome/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -212,6 +226,34 @@
             border-radius: 2px;
         }
 
+        section.section-reveal {
+            opacity: 0;
+            transform: translateY(34px);
+            transition: opacity 0.75s ease, transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        section.section-reveal.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        section.section-reveal.is-visible .section-title::after {
+            animation: titleUnderline 0.7s 0.2s both ease-out;
+            transform-origin: center;
+        }
+
+        @keyframes titleUnderline {
+            from { transform: translateX(-50%) scaleX(0); }
+            to { transform: translateX(-50%) scaleX(1); }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .social-link, section.section-reveal, section.section-reveal.is-visible .section-title::after {
+                animation: none;
+                transition: none;
+            }
+        }
+
         /* Header */
         header {
             position: fixed;
@@ -219,12 +261,18 @@
             left: 0;
             width: 100%;
             z-index: 1000;
-            background: rgba(255, 255, 255, 0.8);
+            background: rgba(255, 255, 255, 0.92);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
-            box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
-            border-bottom: 1px solid rgba(148, 163, 184, 0.15);
-            transition: var(--transition);
+            box-shadow: none;
+            border-bottom: 1px solid #e7eaf2;
+            transition: background 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+        }
+
+        header.scrolled {
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+            border-bottom-color: #dfe4ef;
         }
 
         .dark-mode header {
@@ -236,44 +284,56 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 14px 0;
+            min-height: 68px;
+            gap: 24px;
         }
 
         .logo {
-            font-size: 1.25rem;
+            font-size: 1.05rem;
             font-weight: 700;
-            color: var(--primary-color);
-            letter-spacing: 0.02em;
+            color: #172554;
+            letter-spacing: 0.01em;
             white-space: nowrap;
+        }
+
+        .logo::before {
+            content: '';
+            display: inline-block;
+            width: 7px;
+            height: 7px;
+            margin-right: 9px;
+            border-radius: 50%;
+            background: #4361ee;
+            box-shadow: 0 0 0 5px rgba(67, 97, 238, 0.1);
         }
 
         .nav-links {
             display: flex;
             align-items: center;
-            gap: 4px;
-            padding: 6px;
-            background: rgba(15, 23, 42, 0.045);
-            border: 1px solid rgba(148, 163, 184, 0.24);
-            border-radius: 999px;
-            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7);
+            gap: 26px;
+            padding: 0;
+            background: transparent;
+            border: none;
+            border-radius: 0;
+            box-shadow: none;
         }
 
         .nav-links a {
             color: var(--text-dark);
             font-weight: 500;
-            font-size: 0.88rem;
-            padding: 9px 13px;
-            border-radius: 999px;
-            transition: var(--transition);
+            font-size: 0.86rem;
+            padding: 24px 0 21px;
+            border-radius: 0;
+            transition: color 0.2s ease;
             position: relative;
         }
 
         .nav-links a::after {
             content: '';
             position: absolute;
-            left: 13px;
-            right: 13px;
-            bottom: 5px;
+            left: 0;
+            right: 0;
+            bottom: 15px;
             height: 2px;
             border-radius: 2px;
             background: currentColor;
@@ -283,9 +343,10 @@
 
         .nav-links a:hover,
         .nav-links a.active {
-            color: white;
-            background: linear-gradient(135deg, var(--primary-color), #0ea5e9);
-            box-shadow: 0 6px 14px rgba(67, 97, 238, 0.22);
+            color: var(--primary-color);
+            background: transparent;
+            box-shadow: none;
+            transform: none;
         }
 
         .nav-links a:hover::after,
@@ -324,11 +385,14 @@
             font-size: 1.5rem;
             cursor: pointer;
             color: var(--text-dark);
-            padding: 9px 11px;
-            border: 1px solid rgba(148, 163, 184, 0.25);
-            border-radius: 10px;
-            background: rgba(15, 23, 42, 0.04);
-            transition: var(--transition);
+            width: 44px;
+            height: 44px;
+            place-items: center;
+            padding: 0;
+            border: 1px solid #dbe2ef;
+            border-radius: 8px;
+            background: #fff;
+            transition: color 0.25s ease, border-color 0.25s ease, background 0.25s ease, transform 0.25s ease;
         }
 
         .mobile-menu:hover {
@@ -737,6 +801,76 @@
             }
         }
 
+        /* Experience Section */
+        #experience {
+            background: linear-gradient(135deg, #f8fafc 0%, #eef2ff 100%);
+        }
+
+        .timeline {
+            max-width: 820px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            bottom: 10px;
+            left: 18px;
+            width: 2px;
+            background: linear-gradient(var(--primary-color), #a5b4fc);
+        }
+
+        .timeline-item {
+            position: relative;
+            padding: 0 0 30px 58px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 10px;
+            top: 6px;
+            width: 14px;
+            height: 14px;
+            border: 5px solid #eef2ff;
+            border-radius: 50%;
+            background: var(--primary-color);
+            box-shadow: 0 0 0 2px var(--primary-color);
+        }
+
+        .timeline-card {
+            padding: 22px;
+            background: #fff;
+            border: 1px solid #e5e7eb;
+            border-radius: 14px;
+            box-shadow: 0 10px 24px rgba(15, 23, 42, 0.06);
+        }
+
+        .timeline-card h3 {
+            color: #1e293b;
+            margin-bottom: 6px;
+        }
+
+        .timeline-label {
+            display: block;
+            margin-bottom: 9px;
+            color: var(--primary-color);
+            font-size: 0.86rem;
+            font-weight: 700;
+        }
+
+        .timeline-card p {
+            color: #475569;
+        }
+
+        @media (max-width: 576px) {
+            .timeline-item { padding-left: 48px; }
+            .timeline::before { left: 14px; }
+            .timeline-item::before { left: 6px; }
+        }
+
         /* Projects Section */
         .projects-grid {
             display: grid;
@@ -1116,30 +1250,44 @@
 
         .social-links {
             display: flex;
-            gap: 12px;
-            margin-top: 20px;
+            gap: 14px;
+            margin-top: 24px;
             flex-wrap: wrap;
         }
 
         .social-link {
-            width: 48px;
-            height: 48px;
-            padding: 6px;
-            background: rgba(255, 255, 255, 0.75);
-            border: 1px solid rgba(15, 118, 110, 0.15);
+            --social-color: #4361ee;
+            width: 52px;
+            height: 52px;
+            padding: 7px;
+            background: #fff;
+            border: 1px solid color-mix(in srgb, var(--social-color) 24%, #fff);
             border-radius: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
-            box-shadow: 0 8px 18px rgba(15, 118, 110, 0.12);
-            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            box-shadow: 0 8px 18px rgba(15, 23, 42, 0.12);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+            animation: socialIconFloat 3.2s ease-in-out infinite;
         }
 
+        .social-link:nth-child(1) { --social-color: #0a66c2; animation-delay: 0s; }
+        .social-link:nth-child(2) { --social-color: #d62976; animation-delay: 0.15s; }
+        .social-link:nth-child(3) { --social-color: #24292f; animation-delay: 0.3s; }
+        .social-link:nth-child(4) { --social-color: #25d366; animation-delay: 0.45s; }
+
         .social-link:hover {
-            border-color: var(--primary-color);
-            transform: translateY(-6px) scale(1.08);
-            box-shadow: 0 14px 24px rgba(67, 97, 238, 0.22);
+            background: color-mix(in srgb, var(--social-color) 10%, #fff);
+            border-color: var(--social-color);
+            transform: translateY(-7px) scale(1.09);
+            box-shadow: 0 16px 28px color-mix(in srgb, var(--social-color) 30%, transparent);
+            animation-play-state: paused;
+        }
+
+        .social-link:focus-visible {
+            outline: 3px solid color-mix(in srgb, var(--social-color) 38%, #fff);
+            outline-offset: 3px;
         }
 
         .social-link img {
@@ -1148,6 +1296,11 @@
             object-fit: contain;
             border-radius: 10px;
             display: block;
+        }
+
+        @keyframes socialIconFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-4px); }
         }
 
         .contact-form {
@@ -1188,6 +1341,16 @@
             min-height: 150px;
             resize: vertical;
         }
+
+        .form-status {
+            min-height: 24px;
+            margin-top: 14px;
+            font-size: 0.92rem;
+            font-weight: 500;
+        }
+
+        .form-status.success { color: #15803d; }
+        .form-status.error { color: #b91c1c; }
 
         /* Footer */
         footer {
@@ -1556,25 +1719,54 @@
 
             .nav-links {
                 position: fixed;
-                top: 70px;
-                left: -100%;
-                width: 100%;
-                height: calc(100vh - 70px);
-                background: var(--bg-light);
+                top: 84px;
+                left: 16px;
+                width: calc(100% - 32px);
+                height: auto;
+                max-height: calc(100vh - 100px);
+                overflow-y: auto;
+                background: rgba(255, 255, 255, 0.96);
                 flex-direction: column;
                 align-items: center;
                 justify-content: flex-start;
-                padding-top: 50px;
-                transition: var(--transition);
-                box-shadow: var(--shadow);
+                padding: 14px;
+                gap: 0;
+                border-radius: 22px;
+                box-shadow: 0 22px 45px rgba(15, 23, 42, 0.2);
+                opacity: 0;
+                visibility: hidden;
+                transform: translateY(-12px) scale(0.98);
+                pointer-events: none;
+                transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s ease;
+            }
+
+            .nav-links li,
+            .nav-links a {
+                width: 100%;
+                text-align: center;
+            }
+
+            .nav-links a {
+                display: block;
+                padding: 12px 16px;
+                border-radius: 8px;
+            }
+
+            .nav-links a::after {
+                left: 16px;
+                right: 16px;
+                bottom: 5px;
             }
             
             .nav-links.active {
-                left: 0;
+                opacity: 1;
+                visibility: visible;
+                transform: translateY(0) scale(1);
+                pointer-events: auto;
             }
             
             .mobile-menu {
-                display: block;
+                display: grid;
             }
             
             .hero h1 {
@@ -1616,13 +1808,14 @@
     <!-- Header -->
     <header>
         <div class="container header-container">
-            <a href="#" class="logo">LUTHER MWINUKA | IT EXPERT</a>
+            <a href="#" class="logo">luther mwinuka | it expert</a>
             
             <nav>
                 <ul class="nav-links">
                     <li><a href="#home">Home</a></li>
                     <li><a href="#about">About</a></li>
                     <li><a href="#skills">Skills</a></li>
+                    <li><a href="#experience">Experience</a></li>
                     <li><a href="#projects">Projects</a></li>
                     <li><a href="#blog">Blog</a></li>
                     <li><a href="#certificates">Certificates</a></li>
@@ -1631,9 +1824,6 @@
             </nav>
             
             <div class="header-actions">
-                <button class="theme-toggle" id="themeToggle">
-                    <i class="fas fa-moon"></i>
-                </button>
                 <div class="mobile-menu" id="mobileMenu">
                     <i class="fas fa-bars"></i>
                 </div>
@@ -1652,6 +1842,7 @@
                 </div>
                 <p>I create innovative web applications and digital experiences that solve real-world problems. With expertise in both frontend and backend technologies, I deliver high-quality solutions tailored to your needs.</p>
                 <div class="hero-btns">
+                    <a href="certificates/CV.pdf" class="btn" target="_blank" rel="noopener noreferrer">Download CV</a>
                     <a href="#contact" class="btn btn-outline">💬 Hire Me</a>
                 </div>
             </div>
@@ -1664,7 +1855,7 @@
             <div class="about-content">
                 <div class="about-profile">
                     <div class="about-img">
-                        <img src="photo/luther.JPG" alt="Luther Mwinuka">
+                        <img src="photo/luther.jpg" alt="Luther Mwinuka">
                     </div>
                     <div class="about-badges">
                         <span class="badge">5+ Years Experience</span>
@@ -1943,6 +2134,36 @@
         </div>
     </section>
 
+    <!-- Experience & Education Section -->
+    <section id="experience">
+        <div class="container">
+            <h2 class="section-title">Experience &amp; Education</h2>
+            <div class="timeline">
+                <article class="timeline-item">
+                    <div class="timeline-card">
+                        <span class="timeline-label">Professional Focus</span>
+                        <h3>Full Stack Development &amp; IT Solutions</h3>
+                        <p>Building practical web applications, data-driven systems, and digital tools that improve workflows and solve real-world problems.</p>
+                    </div>
+                </article>
+                <article class="timeline-item">
+                    <div class="timeline-card">
+                        <span class="timeline-label">Academic Foundation</span>
+                        <h3>Bachelor of Information Technology</h3>
+                        <p>Kampala International University — with a foundation in software development, databases, networking, and information systems.</p>
+                    </div>
+                </article>
+                <article class="timeline-item">
+                    <div class="timeline-card">
+                        <span class="timeline-label">Continuous Learning</span>
+                        <h3>Technical Certifications</h3>
+                        <p>Continued training in networking, Python, data science, data analysis, databases, and critical infrastructure protection.</p>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
     <!-- Projects Section -->
     <section id="projects">
         <div class="container">
@@ -1968,6 +2189,10 @@
                             <span class="tech-tag">Monitoring</span>
                             <span class="tech-tag">Reporting</span>
                         </div>
+                        <div class="project-links">
+                            <a href="https://github.com/LutherMwinuka96" class="btn" target="_blank" rel="noopener noreferrer">GitHub Profile</a>
+                            <a href="#contact" class="btn">Request Demo</a>
+                        </div>
                     </div>
                 </div>
                 
@@ -1983,6 +2208,10 @@
                             <span class="tech-tag">NLP</span>
                             <span class="tech-tag">Web Application</span>
                         </div>
+                        <div class="project-links">
+                            <a href="https://github.com/LutherMwinuka96" class="btn" target="_blank" rel="noopener noreferrer">GitHub Profile</a>
+                            <a href="#contact" class="btn">Request Demo</a>
+                        </div>
                     </div>
                 </div>
                 
@@ -1997,6 +2226,10 @@
                             <span class="tech-tag">Event Management</span>
                             <span class="tech-tag">Dashboard</span>
                             <span class="tech-tag">Web Application</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/LutherMwinuka96" class="btn" target="_blank" rel="noopener noreferrer">GitHub Profile</a>
+                            <a href="#contact" class="btn">Request Demo</a>
                         </div>
                     </div>
                 </div>
@@ -2247,28 +2480,29 @@
                 </div>
                 
                 <div class="contact-form">
-                    <form id="contactForm">
+                    <form id="contactForm" novalidate>
                         <div class="form-group">
                             <label for="name">Your Name</label>
-                            <input type="text" id="name" class="form-control" required>
+                            <input type="text" id="name" name="name" class="form-control" required>
                         </div>
                         
                         <div class="form-group">
                             <label for="email">Your Email</label>
-                            <input type="email" id="email" class="form-control" required>
+                            <input type="email" id="email" name="email" class="form-control" required>
                         </div>
                         
                         <div class="form-group">
                             <label for="subject">Subject</label>
-                            <input type="text" id="subject" class="form-control" required>
+                            <input type="text" id="subject" name="subject" class="form-control" required>
                         </div>
                         
                         <div class="form-group">
                             <label for="message">Your Message</label>
-                            <textarea id="message" class="form-control" required></textarea>
+                            <textarea id="message" name="message" class="form-control" required></textarea>
                         </div>
                         
                         <button type="submit" class="btn">Send Message</button>
+                        <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
                     </form>
                 </div>
             </div>
@@ -2290,7 +2524,9 @@
                         <a href="#home">Home</a>
                         <a href="#about">About</a>
                         <a href="#skills">Skills</a>
+                        <a href="#experience">Experience</a>
                         <a href="#projects">Projects</a>
+                        <a href="#certificates">Certificates</a>
                         <a href="#contact">Contact</a>
                     </div>
                 </div>
@@ -2298,42 +2534,18 @@
                 <div class="footer-column">
                     <h3>Services</h3>
                     <div class="footer-links">
-                        <a href="#">Web Development</a>
-                        <a href="#">Mobile Apps</a>
-                        <a href="#">UI/UX Design</a>
-                        <a href="#">Cloud Solutions</a>
-                        <a href="#">IT Consulting</a>
+                        <a href="#contact">Web Development</a>
+                        <a href="#contact">Mobile Apps</a>
+                        <a href="#contact">UI/UX Design</a>
+                        <a href="#contact">Cloud Solutions</a>
+                        <a href="#contact">IT Consulting</a>
                     </div>
                 </div>
 
-                <div class="footer-column visitor-column">
-                    <h3>Visitor Statistics</h3>
-                    <table class="visitor-stats" aria-label="Visitor statistics">
-                        <tbody>
-                            <tr>
-                                <th scope="row">Online</th>
-                                <td id="visitorsOnline">0</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">This Week</th>
-                                <td id="visitorsWeek">0</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">This Month</th>
-                                <td id="visitorsMonth">0</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">This Year</th>
-                                <td id="visitorsYear">0</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
             </div>
             
             <div class="footer-bottom">
                 <p class="copyright-text">Copyright © <span id="copyrightYear">2025</span> Luther Mwinuka. All rights reserved.</p>
-                <span class="visitor-counter">Visitors: <span id="visitorCount">0</span></span>
             </div>
         </div>
     </footer>
@@ -2373,6 +2585,14 @@
         // Mobile Menu Toggle
         const mobileMenu = document.getElementById('mobileMenu');
         const navLinks = document.querySelector('.nav-links');
+        const pageHeader = document.querySelector('header');
+
+        function updateHeaderStyle() {
+            pageHeader.classList.toggle('scrolled', window.scrollY > 24);
+        }
+
+        updateHeaderStyle();
+        window.addEventListener('scroll', updateHeaderStyle, { passive: true });
 
         const navigationItems = document.querySelectorAll('.nav-links a');
         navigationItems[0].classList.add('active');
@@ -2389,32 +2609,6 @@
             mobileMenu.querySelector('i').classList.toggle('fa-bars');
             mobileMenu.querySelector('i').classList.toggle('fa-times');
         });
-        
-        // Theme Toggle
-        const themeToggle = document.getElementById('themeToggle');
-        const themeIcon = themeToggle.querySelector('i');
-        
-        themeToggle.addEventListener('click', () => {
-            document.body.classList.toggle('dark-mode');
-            
-            if (document.body.classList.contains('dark-mode')) {
-                themeIcon.classList.remove('fa-moon');
-                themeIcon.classList.add('fa-sun');
-                localStorage.setItem('theme', 'dark');
-            } else {
-                themeIcon.classList.remove('fa-sun');
-                themeIcon.classList.add('fa-moon');
-                localStorage.setItem('theme', 'light');
-            }
-        });
-        
-        // Check for saved theme preference
-        const savedTheme = localStorage.getItem('theme');
-        if (savedTheme === 'dark') {
-            document.body.classList.add('dark-mode');
-            themeIcon.classList.remove('fa-moon');
-            themeIcon.classList.add('fa-sun');
-        }
         
         // Typing Effect
         const typingElement = document.getElementById('typing');
@@ -2511,32 +2705,46 @@
         
         // Form Submission
         const contactForm = document.getElementById('contactForm');
+        const formStatus = document.getElementById('formStatus');
         
-        contactForm.addEventListener('submit', (e) => {
+        contactForm.addEventListener('submit', async (e) => {
             e.preventDefault();
-            
-            // Get form values
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const subject = document.getElementById('subject').value;
-            const message = document.getElementById('message').value;
-            
-            // Show loading state
+
+            if (!contactForm.checkValidity()) {
+                contactForm.reportValidity();
+                return;
+            }
+
             const submitBtn = contactForm.querySelector('button[type="submit"]');
             const originalText = submitBtn.textContent;
             submitBtn.innerHTML = '<div class="loading"></div>';
             submitBtn.disabled = true;
-            
-            // In a real application, you would send this data to a server
-            // For this demo, we'll simulate API call
-            setTimeout(() => {
-                alert(`Thank you, ${name}! Your message has been sent. I'll get back to you soon.`);
-                
-                // Reset form and button
+
+            formStatus.textContent = '';
+            formStatus.className = 'form-status';
+
+            try {
+                const response = await fetch('contact.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(Object.fromEntries(new FormData(contactForm)))
+                });
+                const result = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(result.message || 'Unable to send your message.');
+                }
+
                 contactForm.reset();
+                formStatus.textContent = result.message || 'Thank you! Your message has been sent.';
+                formStatus.classList.add('success');
+            } catch (error) {
+                formStatus.textContent = error.message || 'Unable to send your message. Please email me directly.';
+                formStatus.classList.add('error');
+            } finally {
                 submitBtn.textContent = originalText;
                 submitBtn.disabled = false;
-            }, 2000);
+            }
         });
         
         // Animate skill bars on scroll
@@ -2570,36 +2778,7 @@
         
         observer.observe(skillsSection);
         
-        // Count this visit and load the real daily, weekly, monthly, and yearly totals.
-        function loadVisitorStats(isHeartbeat = false) {
-            const endpoint = isHeartbeat ? 'api/visitor_counter.php?heartbeat=1' : 'api/visitor_counter.php';
-
-            fetch(endpoint, { cache: 'no-store' })
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Visitor counter request failed');
-                    }
-                    return response.json();
-                })
-                .then(stats => {
-                    if (stats.status !== 'success') {
-                        throw new Error('Visitor counter returned an error');
-                    }
-
-                    document.getElementById('visitorCount').textContent = stats.total_visitors;
-                    document.getElementById('visitorsOnline').textContent = stats.online_visitors;
-                    document.getElementById('visitorsWeek').textContent = stats.week_visitors;
-                    document.getElementById('visitorsMonth').textContent = stats.month_visitors;
-                    document.getElementById('visitorsYear').textContent = stats.year_visitors;
-                })
-                .catch(error => {
-                    console.error('Unable to load visitor statistics:', error);
-                });
-        }
-
         document.getElementById('copyrightYear').textContent = new Date().getFullYear();
-        loadVisitorStats();
-        setInterval(() => loadVisitorStats(true), 120000);
         
         // Project Filtering
         const filterBtns = document.querySelectorAll('.filter-btn');
@@ -2733,7 +2912,18 @@
         
         function initHeroBackground() {
             const hero = document.querySelector('.hero');
-            const backgrounds = ['photo/back1.jpg', 'photo/back2.jpg'];
+            const backgrounds = [
+                'photo/back1.jpg',
+                'photo/back2.jpg',
+                'photo/back3.jpg',
+                'photo/back4.jpg',
+                'photo/back5.jpg',
+                'photo/back6.jpg',
+                'photo/back7.jpg',
+                'photo/back8.jpg',
+                'photo/back9.jpg',
+                'photo/back10.jpg'
+            ];
             let bgIndex = 0;
 
             if (!hero) return;
@@ -2810,7 +3000,29 @@
             initParticles();
         });
         
-        // Add scroll animation to elements
+        // Reveal each content section as it enters the viewport.
+        const sectionsToReveal = document.querySelectorAll('section:not(#home)');
+        const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        if (reducedMotion) {
+            sectionsToReveal.forEach(section => section.classList.add('is-visible'));
+        } else {
+            const sectionObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.12 });
+
+            sectionsToReveal.forEach(section => {
+                section.classList.add('section-reveal');
+                sectionObserver.observe(section);
+            });
+        }
+
+        // Add scroll animation to cards inside each section.
         function checkScroll() {
             const elements = document.querySelectorAll('.skill-category, .project-card, .blog-card, .certificate-card');
             
