@@ -1,0 +1,153 @@
+-- Create database
+CREATE DATABASE IF NOT EXISTS portfolio_db;
+USE portfolio_db;
+
+-- Users table (for admin access)
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) NOT NULL UNIQUE,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    password_hash VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Projects table
+CREATE TABLE projects (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    description TEXT,
+    image_url VARCHAR(500),
+    category ENUM('web', 'mobile', 'design', 'other') DEFAULT 'web',
+    tech_stack JSON,
+    live_demo_url VARCHAR(500),
+    github_url VARCHAR(500),
+    featured BOOLEAN DEFAULT FALSE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+-- Blog posts table
+CREATE TABLE blog_posts (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    excerpt TEXT,
+    content LONGTEXT,
+    image_url VARCHAR(500),
+    category VARCHAR(100),
+    tags JSON,
+    published BOOLEAN DEFAULT FALSE,
+    published_at TIMESTAMP NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+-- Certificates table
+CREATE TABLE certificates (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    issuer VARCHAR(255) NOT NULL,
+    issue_date DATE,
+    certificate_url VARCHAR(500),
+    image_url VARCHAR(500),
+    credential_id VARCHAR(100),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Skills table
+CREATE TABLE skills (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    category ENUM('frontend', 'backend', 'tools', 'other') NOT NULL,
+    proficiency INT CHECK (proficiency >= 0 AND proficiency <= 100),
+    icon_class VARCHAR(100),
+    display_order INT DEFAULT 0,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Contact messages table
+CREATE TABLE contact_messages (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    subject VARCHAR(500),
+    message TEXT NOT NULL,
+    ip_address VARCHAR(45),
+    user_agent TEXT,
+    is_read BOOLEAN DEFAULT FALSE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Visitor counter table
+CREATE TABLE visitor_counter (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    visit_date DATE UNIQUE,
+    visit_count INT DEFAULT 1,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Site settings table
+CREATE TABLE site_settings (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    setting_key VARCHAR(100) UNIQUE NOT NULL,
+    setting_value TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+-- Insert sample data
+
+-- Insert admin user (password: admin123)
+INSERT INTO users (username, email, password_hash) VALUES 
+('admin', 'admin@lutherportfolio.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi');
+
+-- Insert skills
+INSERT INTO skills (name, category, proficiency, icon_class, display_order) VALUES
+('HTML/CSS', 'frontend', 95, 'fab fa-html5', 1),
+('JavaScript', 'frontend', 90, 'fab fa-js-square', 2),
+('React', 'frontend', 85, 'fab fa-react', 3),
+('Bootstrap', 'frontend', 90, 'fab fa-bootstrap', 4),
+('PHP', 'backend', 85, 'fab fa-php', 5),
+('Node.js', 'backend', 80, 'fab fa-node-js', 6),
+('MySQL', 'backend', 85, 'fas fa-database', 7),
+('MongoDB', 'backend', 75, 'fas fa-server', 8),
+('Git', 'tools', 90, 'fab fa-git-alt', 9),
+('VS Code', 'tools', 95, 'fas fa-code', 10),
+('Figma', 'tools', 80, 'fab fa-figma', 11),
+('Firebase', 'tools', 75, 'fas fa-fire', 12);
+
+-- Insert projects
+INSERT INTO projects (title, description, image_url, category, tech_stack, live_demo_url, github_url, featured) VALUES
+('E-commerce Platform', 'A full-featured online shopping platform with product catalog, shopping cart, and payment integration.', 'https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1074&q=80', 'web', '["React", "Node.js", "MongoDB", "Stripe API"]', 'https://demo-ecommerce.luther.com', 'https://github.com/luther/ecommerce-platform', TRUE),
+('Task Management App', 'A productivity application for managing tasks, projects, and team collaboration with real-time updates.', 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80', 'mobile', '["Vue.js", "Firebase", "CSS3", "PWA"]', 'https://taskapp.luther.com', 'https://github.com/luther/task-manager', TRUE),
+('Weather Dashboard', 'An interactive weather application with forecasts, maps, and historical data visualization.', 'https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80', 'design', '["JavaScript", "API Integration", "Chart.js", "Bootstrap"]', 'https://weather.luther.com', 'https://github.com/luther/weather-dashboard', TRUE);
+
+-- Insert blog posts
+INSERT INTO blog_posts (title, excerpt, content, image_url, category, tags, published, published_at) VALUES
+('Modern JavaScript ES6+ Features You Should Know', 'Explore the latest JavaScript features that can make your code cleaner, more efficient, and easier to maintain.', '<p>JavaScript has evolved significantly with the introduction of ES6 and subsequent versions. Here are some essential features every developer should know...</p>', 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80', 'Web Development', '["JavaScript", "ES6", "Web Development"]', TRUE, NOW()),
+('Getting Started with AWS: A Beginner''s Guide', 'Learn the fundamentals of Amazon Web Services and how to deploy your first application to the cloud.', '<p>Amazon Web Services (AWS) is the leading cloud platform that offers over 200 fully featured services...</p>', 'https://images.unsplash.com/photo-1627398242454-45a1465c2479?ixlib=rb-4.0.3&auto=format&fit=crop&w=1074&q=80', 'Cloud Computing', '["AWS", "Cloud", "Beginner"]', TRUE, NOW()),
+('Principles of Effective UI/UX Design for Developers', 'Understand key design principles that can help you create more intuitive and user-friendly applications.', '<p>As developers, we often focus on functionality, but user experience is equally important...</p>', 'https://images.unsplash.com/photo-1555949963-aa79dcee981c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80', 'Design', '["UI/UX", "Design", "Development"]', TRUE, NOW());
+
+-- Insert certificates
+INSERT INTO certificates (title, issuer, issue_date, certificate_url, image_url, credential_id) VALUES
+('AWS Certified Solutions Architect', 'Amazon Web Services', '2023-06-15', 'https://aws.amazon.com/certification/', 'https://images.unsplash.com/photo-1587440871875-191322ee64b0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1171&q=80', 'AWS-SAA-C03-123456'),
+('Advanced React & Redux', 'Meta', '2022-11-20', 'https://coursera.org/certificates/react', 'https://images.unsplash.com/photo-1633356122544-f134324a6cee?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80', 'META-REACT-789012'),
+('Node.js Backend Development', 'Udemy', '2022-08-10', 'https://udemy.com/certificate/nodejs', 'https://images.unsplash.com/photo-1611224923853-80b023f02d71?ixlib=rb-4.0.3&auto=format&fit=crop&w=1139&q=80', 'UDEMY-NODE-345678');
+
+-- Insert site settings
+INSERT INTO site_settings (setting_key, setting_value) VALUES
+('site_title', 'Luther Mwinuka | IT Expert'),
+('site_description', 'Professional Portfolio of Luther Mwinuka - Software Engineer & IT Solutions Expert'),
+('contact_email', 'luther@example.com'),
+('phone_number', '+255 123 456 789'),
+('location', 'Dar es Salaam, Tanzania'),
+('github_url', 'https://github.com/luther'),
+('linkedin_url', 'https://linkedin.com/in/luther'),
+('twitter_url', 'https://twitter.com/luther');
+
+-- Create indexes for better performance
+CREATE INDEX idx_projects_category ON projects(category);
+CREATE INDEX idx_projects_featured ON projects(featured);
+CREATE INDEX idx_blog_published ON blog_posts(published, published_at);
+CREATE INDEX idx_skills_category ON skills(category);
+CREATE INDEX idx_contact_created ON contact_messages(created_at);
+CREATE INDEX idx_visitor_date ON visitor_counter(visit_date);

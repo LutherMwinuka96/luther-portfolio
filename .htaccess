@@ -1,0 +1,20 @@
+RewriteEngine On
+
+# API routes
+RewriteRule ^api/projects/?$ api/projects.php [L]
+RewriteRule ^api/blog/?$ api/blog.php [L]
+RewriteRule ^api/skills/?$ api/skills.php [L]
+RewriteRule ^api/visitors/?$ api/visitor_counter.php [L]
+
+# Contact form
+RewriteRule ^contact/?$ contact.php [L]
+
+# Admin routes
+RewriteRule ^admin/?$ admin/dashboard.php [L]
+RewriteRule ^admin/login/?$ admin/login.php [L]
+RewriteRule ^admin/logout/?$ admin/logout.php [L]
+
+# Enable CORS for API
+Header always set Access-Control-Allow-Origin "*"
+Header always set Access-Control-Allow-Methods "GET, POST, OPTIONS"
+Header always set Access-Control-Allow-Headers "Content-Type, Authorization"
