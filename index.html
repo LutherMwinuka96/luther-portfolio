@@ -382,24 +382,71 @@
 
         .mobile-menu {
             display: none;
-            font-size: 1.5rem;
             cursor: pointer;
-            color: var(--text-dark);
             width: 44px;
             height: 44px;
-            place-items: center;
             padding: 0;
-            border: 1px solid #dbe2ef;
-            border-radius: 8px;
-            background: #fff;
-            transition: color 0.25s ease, border-color 0.25s ease, background 0.25s ease, transform 0.25s ease;
+            place-content: center;
+            border: 1px solid rgba(67, 97, 238, 0.28);
+            border-radius: 12px;
+            background: linear-gradient(135deg, #ffffff, #eef2ff);
+            box-shadow: 0 5px 14px rgba(67, 97, 238, 0.14);
+            transition: color 0.25s ease, border-color 0.25s ease, background 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
         }
 
         .mobile-menu:hover {
-            color: var(--primary-color);
             border-color: var(--primary-color);
             transform: translateY(-2px);
+            box-shadow: 0 8px 18px rgba(67, 97, 238, 0.24);
         }
+
+        .hamburger-lines,
+        .hamburger-lines::before,
+        .hamburger-lines::after {
+            display: block;
+            width: 21px;
+            height: 2px;
+            border-radius: 999px;
+            background: #243b8f;
+            transition: transform 0.25s ease, opacity 0.2s ease, background 0.25s ease;
+        }
+
+        .hamburger-lines { position: relative; }
+
+        .hamburger-lines::before,
+        .hamburger-lines::after {
+            content: '';
+            position: absolute;
+            left: 0;
+        }
+
+        .hamburger-lines::before { top: -7px; }
+        .hamburger-lines::after { top: 7px; }
+
+        .mobile-menu[aria-expanded="true"] {
+            background: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+
+        .mobile-menu[aria-expanded="true"] .hamburger-lines { background: transparent; }
+
+        .mobile-menu[aria-expanded="true"] .hamburger-lines::before,
+        .mobile-menu[aria-expanded="true"] .hamburger-lines::after {
+            top: 0;
+            background: #fff;
+        }
+
+        .mobile-menu[aria-expanded="true"] .hamburger-lines::before { transform: rotate(45deg); }
+        .mobile-menu[aria-expanded="true"] .hamburger-lines::after { transform: rotate(-45deg); }
+
+        .dark-mode .mobile-menu {
+            background: #1e293b;
+            border-color: #475569;
+        }
+
+        .dark-mode .hamburger-lines,
+        .dark-mode .hamburger-lines::before,
+        .dark-mode .hamburger-lines::after { background: #e0e7ff; }
 
         /* Hero Section */
         .hero {
@@ -1711,7 +1758,7 @@
             }
         }
 
-        @media (max-width: 768px) {
+        @media (max-width: 1024px) {
             .hero {
                 min-height: auto;
                 padding: 120px 0 80px;
@@ -1738,6 +1785,11 @@
                 transform: translateY(-12px) scale(0.98);
                 pointer-events: none;
                 transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s ease;
+            }
+
+            .dark-mode .nav-links {
+                background: rgba(30, 41, 59, 0.98);
+                border: 1px solid rgba(148, 163, 184, 0.22);
             }
 
             .nav-links li,
@@ -1790,6 +1842,38 @@
         }
 
         @media (max-width: 576px) {
+            .container {
+                width: 100%;
+                padding-left: 18px;
+                padding-right: 18px;
+            }
+
+            .header-container {
+                min-height: 64px;
+                gap: 10px;
+            }
+
+            .logo {
+                max-width: calc(100vw - 82px);
+                overflow: hidden;
+                text-overflow: ellipsis;
+                font-size: 0.92rem;
+            }
+
+            .mobile-menu {
+                width: 42px;
+                height: 42px;
+            }
+
+            .nav-links {
+                top: 76px;
+                left: 12px;
+                width: calc(100% - 24px);
+                max-height: calc(100vh - 88px);
+                padding: 10px;
+                border-radius: 18px;
+            }
+
             .hero-btns {
                 flex-direction: column;
             }
@@ -1811,7 +1895,7 @@
             <a href="#" class="logo">luther mwinuka | it expert</a>
             
             <nav>
-                <ul class="nav-links">
+                <ul class="nav-links" id="primaryNavigation">
                     <li><a href="#home">Home</a></li>
                     <li><a href="#about">About</a></li>
                     <li><a href="#skills">Skills</a></li>
@@ -1824,9 +1908,9 @@
             </nav>
             
             <div class="header-actions">
-                <div class="mobile-menu" id="mobileMenu">
-                    <i class="fas fa-bars"></i>
-                </div>
+                <button class="mobile-menu" id="mobileMenu" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="primaryNavigation">
+                    <span class="hamburger-lines" aria-hidden="true"></span>
+                </button>
             </div>
         </div>
     </header>
@@ -2587,6 +2671,12 @@
         const navLinks = document.querySelector('.nav-links');
         const pageHeader = document.querySelector('header');
 
+        function setMobileMenu(open) {
+            navLinks.classList.toggle('active', open);
+            mobileMenu.setAttribute('aria-expanded', String(open));
+            mobileMenu.setAttribute('aria-label', open ? 'Close navigation menu' : 'Open navigation menu');
+        }
+
         function updateHeaderStyle() {
             pageHeader.classList.toggle('scrolled', window.scrollY > 24);
         }
@@ -2605,9 +2695,20 @@
         });
         
         mobileMenu.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-            mobileMenu.querySelector('i').classList.toggle('fa-bars');
-            mobileMenu.querySelector('i').classList.toggle('fa-times');
+            setMobileMenu(!navLinks.classList.contains('active'));
+        });
+
+        document.addEventListener('keydown', event => {
+            if (event.key === 'Escape' && navLinks.classList.contains('active')) {
+                setMobileMenu(false);
+                mobileMenu.focus();
+            }
+        });
+
+        document.addEventListener('click', event => {
+            if (navLinks.classList.contains('active') && !event.target.closest('nav') && !event.target.closest('#mobileMenu')) {
+                setMobileMenu(false);
+            }
         });
         
         // Typing Effect
@@ -2660,9 +2761,7 @@
                     
                     // Close mobile menu if open
                     if (navLinks.classList.contains('active')) {
-                        navLinks.classList.remove('active');
-                        mobileMenu.querySelector('i').classList.add('fa-bars');
-                        mobileMenu.querySelector('i').classList.remove('fa-times');
+                        setMobileMenu(false);
                     }
                 }
             });
