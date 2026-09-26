@@ -1345,6 +1345,45 @@
             display: block;
         }
 
+        .social-link { width: 48px; height: 48px; padding: 0; border-radius: 50%; animation: none; }
+        .social-link img { width: 25px; height: 25px; border-radius: 0; object-fit: contain; }
+        .dark-mode .social-link { background: #14221f; }
+        .back-to-top { position: fixed; right: 24px; bottom: 24px; z-index: 900; width: 46px; height: 46px; display: grid; place-items: center; border: 1px solid rgba(15,118,110,.2); border-radius: 50%; color: #fff; background: var(--primary-color); box-shadow: 0 8px 22px rgba(15,35,32,.2); opacity: 0; visibility: hidden; transform: translateY(8px); transition: opacity .2s ease, transform .2s ease, visibility .2s ease; }
+        .back-to-top.visible { opacity: 1; visibility: visible; transform: translateY(0); }
+        .theme-toggle { width: 40px; height: 40px; padding: 0; display: grid; place-items: center; border: 1px solid rgba(15,118,110,.16); background: rgba(15,118,110,.06); font-size: 1rem; }
+        .dark-mode .theme-toggle { color: var(--text-dark); }
+        .header-actions { gap: 10px; }
+        .mobile-menu { border-radius: 50%; background: var(--card-light); box-shadow: none; }
+        .nav-links a { font-weight: 600; letter-spacing: .01em; }
+        header nav { flex: 1; display: flex; justify-content: center; min-width: 0; }
+        .nav-links {
+            gap: clamp(2px, .55vw, 8px);
+            padding: 5px;
+            background: rgba(15, 118, 110, .045);
+            border: 1px solid rgba(15, 118, 110, .09);
+            border-radius: 999px;
+        }
+        .nav-links a {
+            display: block;
+            padding: 10px 11px;
+            border-radius: 999px;
+            font-size: .76rem;
+            white-space: nowrap;
+        }
+        .nav-links a::after { display: none; }
+        .nav-links a:hover { background: rgba(15, 118, 110, .08); }
+        .nav-links a.active { color: var(--primary-color); background: var(--card-light); box-shadow: 0 2px 9px rgba(15, 35, 32, .08); }
+        .nav-links li:last-child a { padding-left: 15px; padding-right: 15px; color: #fff; background: var(--primary-color); }
+        .nav-links li:last-child a:hover, .nav-links li:last-child a.active { color: #fff; background: var(--secondary-color); box-shadow: 0 4px 12px rgba(15,118,110,.2); }
+        .dark-mode .nav-links { background: rgba(94, 234, 212, .06); border-color: rgba(94, 234, 212, .13); }
+        .dark-mode .nav-links a.active { background: #1a2b27; }
+        .dark-mode .nav-links li:last-child a { color: #062b27; }
+        .certificate-card { cursor: default; }
+        .certificate-card:hover { transform: translateY(-6px) !important; }
+        .certificate-img { background: #e8f3ef; }
+        .certificate-placeholder { background: linear-gradient(135deg, #edf7f4 0%, #d8eee8 58%, #f8eee2 100%); }
+        .dark-mode .certificate-placeholder { background: linear-gradient(135deg, #182d29 0%, #1c3832 60%, #332b22 100%); }
+
         @keyframes socialIconFloat {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-4px); }
@@ -1501,49 +1540,6 @@
             background: rgba(255, 255, 255, 0.06);
             font-weight: 700;
             text-align: right;
-        }
-
-        /* Lightbox */
-        .lightbox {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 2000;
-            opacity: 0;
-            visibility: hidden;
-            transition: var(--transition);
-        }
-
-        .lightbox.active {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .lightbox-content {
-            max-width: 90%;
-            max-height: 90%;
-            position: relative;
-        }
-
-        .lightbox-content img {
-            width: 100%;
-            height: auto;
-            border-radius: 10px;
-        }
-
-        .lightbox-close {
-            position: absolute;
-            top: -40px;
-            right: 0;
-            color: white;
-            font-size: 2rem;
-            cursor: pointer;
         }
 
         /* AI Chat Assistant */
@@ -1886,13 +1882,267 @@
                 grid-template-columns: 1fr;
             }
         }
+
+        /* Contemporary visual refresh */
+        :root {
+            --primary-color: #0f766e;
+            --secondary-color: #115e59;
+            --accent-color: #f97316;
+            --success-color: #a7f3d0;
+            --text-dark: #172321;
+            --bg-light: #fbfcfa;
+            --card-light: #ffffff;
+            --shadow: 0 18px 50px rgba(15, 35, 32, 0.09);
+        }
+
+        .dark-mode {
+            --primary-color: #5eead4;
+            --secondary-color: #2dd4bf;
+            --accent-color: #fb923c;
+            --text-dark: #e5efec;
+            --bg-light: #0b1312;
+            --card-light: #111e1c;
+            --shadow: 0 18px 50px rgba(0, 0, 0, 0.24);
+        }
+
+        html { scroll-behavior: smooth; scroll-padding-top: 88px; }
+        body { background: var(--bg-light); letter-spacing: -0.01em; }
+        ::selection { color: #fff; background: #0f766e; }
+        .container { max-width: 1160px; }
+
+        header {
+            background: rgba(251, 252, 250, 0.82);
+            border-bottom-color: rgba(15, 118, 110, 0.1);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+        }
+        header.scrolled { background: rgba(251, 252, 250, 0.96); box-shadow: 0 8px 32px rgba(15, 35, 32, 0.08); }
+        .dark-mode header, .dark-mode header.scrolled { background: rgba(11, 19, 18, 0.9); }
+        .header-container { min-height: 76px; }
+        .logo { color: var(--text-dark); font-size: 0.92rem; letter-spacing: 0.015em; text-transform: uppercase; }
+        .logo::before { background: var(--accent-color); box-shadow: 0 0 0 5px rgba(249, 115, 22, 0.12); }
+        .nav-links { gap: clamp(12px, 1.7vw, 24px); }
+        .nav-links a { font-size: 0.8rem; font-weight: 500; }
+        .nav-links a::after { background: var(--accent-color); }
+        .nav-links a:hover, .nav-links a.active { color: var(--primary-color); }
+
+        .btn {
+            padding: 13px 22px;
+            border-radius: 999px;
+            background: var(--primary-color);
+            font-size: 0.92rem;
+            font-weight: 600;
+            box-shadow: 0 8px 20px rgba(15, 118, 110, 0.18);
+        }
+        .btn:hover { background: var(--secondary-color); transform: translateY(-2px); box-shadow: 0 12px 26px rgba(15, 118, 110, 0.24); }
+        .btn-outline { box-shadow: none; }
+        section { padding: clamp(68px, 8vw, 104px) 0; }
+        #about, #skills, #projects, #blog, #certificates, #contact {
+            background: var(--bg-light);
+            border-top: 1px solid rgba(15, 118, 110, 0.09);
+        }
+        #experience { background: #f1f7f4; }
+        .dark-mode #experience { background: #101c19; }
+        .section-title { font-size: clamp(2rem, 4vw, 2.7rem); letter-spacing: -0.045em; margin-bottom: 54px; }
+        .section-title::after { width: 44px; height: 4px; bottom: -13px; background: var(--accent-color); }
+
+        .hero {
+            min-height: min(780px, 94vh);
+            padding: 150px 0 110px;
+            background-image: linear-gradient(105deg, rgba(8, 32, 29, 0.88) 0%, rgba(9, 49, 45, 0.76) 54%, rgba(15, 118, 110, 0.38) 100%), url('photo/back1.jpg');
+            background-position: center;
+        }
+        .hero::before { opacity: 0.18; }
+        .hero-content { max-width: 700px; }
+        .hero h1 { max-width: 680px; font-size: clamp(2.8rem, 6.2vw, 5rem); line-height: 1.04; letter-spacing: -0.06em; margin-bottom: 24px; }
+        .typing-text { min-height: 42px; margin-bottom: 20px; font-size: clamp(1.15rem, 2.6vw, 1.65rem); color: rgba(255,255,255,.88); }
+        .typing-text span { color: #a7f3d0; }
+        .hero-content > p { max-width: 590px; color: rgba(255,255,255,.82); font-size: 1.02rem; line-height: 1.85; }
+        .hero-btns { gap: 12px; margin-top: 32px; }
+        .hero .btn { background: #fff; color: #115e59; box-shadow: none; }
+        .hero .btn-outline { border: 1px solid rgba(255,255,255,.58); background: rgba(255,255,255,.08); color: #fff; backdrop-filter: blur(8px); }
+        .hero .btn-outline:hover { background: #fff; color: #115e59; }
+
+        .about-profile, .skill-category, .skills-brief, .project-card, .blog-card, .certificate-card,
+        .contact-info, .contact-form {
+            border: 1px solid rgba(15, 118, 110, 0.1);
+            border-radius: 22px;
+            box-shadow: 0 10px 34px rgba(15, 35, 32, 0.055);
+        }
+        .about-profile { background: var(--card-light); padding: 24px; }
+        .about-img { border: 6px solid var(--card-light); box-shadow: 0 16px 38px rgba(15, 118, 110, 0.18); }
+        .badge { background: rgba(15, 118, 110, .1); color: var(--primary-color); padding: 7px 13px; font-size: .78rem; }
+        .about-text h3 { background-image: linear-gradient(90deg, #0f766e, #f97316); }
+        .fact-item { border-radius: 13px; background: rgba(255,255,255,.55); }
+        .dark-mode .fact-item { background: rgba(255,255,255,.035); }
+        .skill-category, .skills-brief { padding: 28px; }
+        .skill-category:hover, .project-card:hover, .blog-card:hover, .certificate-card:hover { transform: translateY(-6px); box-shadow: var(--shadow); }
+        .skill-bar { height: 8px; background: rgba(15,118,110,.12); }
+        .skill-progress { background: linear-gradient(90deg, #0f766e, #34d399); }
+        .project-card, .blog-card, .certificate-card { overflow: hidden; background: var(--card-light); transition: transform .3s ease, box-shadow .3s ease; }
+        .project-img { overflow: hidden; }
+        .project-img img { transition: transform .55s cubic-bezier(.2,.7,.2,1); }
+        .project-card:hover .project-img img { transform: scale(1.045); }
+        .project-content { padding: 24px; }
+        .project-tech span, .filter-btn { border-radius: 999px; }
+        .filter-btn { padding: 9px 18px; background: var(--card-light); border: 1px solid rgba(15,118,110,.14); color: var(--text-dark); }
+        .filter-btn.active { background: var(--primary-color); color: #fff; }
+        .contact-form { padding: clamp(22px, 4vw, 38px); background: var(--card-light); }
+        input, textarea, select { border-radius: 12px !important; }
+        :focus-visible { outline: 3px solid rgba(249,115,22,.7); outline-offset: 3px; }
+
+        @media (max-width: 1024px) {
+            .header-container { min-height: 70px; }
+            header nav { flex: initial; }
+            .nav-links { top: 82px; }
+            .nav-links { padding: 14px; border-radius: 20px; gap: 2px; }
+            .nav-links a { padding: 12px 16px; border-radius: 12px; font-size: .9rem; }
+            .nav-links a:hover, .nav-links a.active { background: rgba(15,118,110,.08); box-shadow: none; }
+            .nav-links li:last-child a { color: #fff; background: var(--primary-color); }
+            .nav-links li:last-child a.active, .nav-links li:last-child a:hover { color: #fff; background: var(--secondary-color); }
+            .dark-mode .nav-links { background: rgba(17,30,28,.98); }
+            .dark-mode .nav-links a.active { background: rgba(94,234,212,.09); }
+            .hero { min-height: 680px; }
+            .hero h1 { font-size: clamp(2.8rem, 8vw, 4.4rem); }
+        }
+        @media (max-width: 576px) {
+            .hero { min-height: 650px; padding: 128px 0 82px; background-position: 58% center; }
+            .hero h1 { font-size: clamp(2.55rem, 12vw, 3.5rem); }
+            .hero-content > p { font-size: .96rem; }
+            .hero-btns { align-items: stretch; }
+            .hero-btns .btn { width: 100%; }
+            .section-title { margin-bottom: 42px; }
+            .about-profile { padding: 20px; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+        }
+        @media (min-width: 1025px) {
+            .header-container { width: 100%; max-width: none; padding-left: clamp(22px, 4vw, 64px); padding-right: clamp(22px, 4vw, 64px); gap: clamp(20px, 3vw, 48px); }
+            header nav { flex: 1; display: flex; justify-content: flex-end; min-width: 0; }
+            .nav-links { gap: clamp(13px, 1.6vw, 25px); padding: 0; background: transparent; border: 0; border-radius: 0; }
+            .nav-links a { display: block; padding: 26px 0 23px; border-radius: 0; font-size: .78rem; white-space: nowrap; }
+            .nav-links a::after { display: block; left: 0; right: 0; bottom: 16px; height: 2px; background: var(--accent-color); }
+            .nav-links a:hover { background: transparent; }
+            .nav-links a.active { color: var(--primary-color); background: transparent; box-shadow: none; }
+            .nav-links li:last-child a { padding-left: 0; padding-right: 0; color: var(--primary-color); background: transparent; }
+            .nav-links li:last-child a:hover, .nav-links li:last-child a.active { color: var(--secondary-color); background: transparent; box-shadow: none; }
+            .dark-mode .nav-links { background: transparent; border: 0; }
+            .dark-mode .nav-links a.active { background: transparent; }
+            .dark-mode .nav-links li:last-child a { color: var(--primary-color); }
+        }
+        .logo { display: inline-flex; align-items: center; gap: 11px; color: var(--text-dark); text-transform: none; font-size: .96rem; letter-spacing: -.025em; }
+        .logo::before { display: none; }
+        .logo-mark { flex: 0 0 42px; width: 42px; height: 42px; display: block; overflow: hidden; border-radius: 50%; background: #050a12; box-shadow: 0 5px 14px rgba(15,35,32,.2); }
+        .logo-mark img { display: block; width: 100%; height: 100%; object-fit: cover; }
+        .logo-name { font-weight: 700; white-space: nowrap; }
+        .logo-name span { color: var(--primary-color); }
+        @media (max-width: 1024px) {
+            .header-container { width: 100%; max-width: none; padding-left: 24px; padding-right: 24px; }
+            .logo { gap: 9px; font-size: .94rem; }
+            .logo-mark { width: 36px; height: 36px; flex-basis: 36px; border-radius: 11px; }
+        }
+        @media (max-width: 576px) {
+            .header-container { padding-left: 17px; padding-right: 17px; }
+            .logo { max-width: calc(100vw - 130px); }
+            .logo-name { overflow: hidden; text-overflow: ellipsis; }
+        }
+
+        /* Contact section finish */
+        #contact { background: linear-gradient(145deg, #f1f7f4 0%, #fbfcfa 62%, #f8f1e9 100%); }
+        .dark-mode #contact { background: linear-gradient(145deg, #10201c 0%, #0b1312 62%, #1d1914 100%); }
+        #contact .section-title { text-align: left; margin-bottom: 44px; font-size: clamp(2.4rem, 5vw, 3.35rem); }
+        #contact .section-title::after { left: 0; transform: none; width: 50px; }
+        .contact-container { align-items: stretch; gap: clamp(24px, 5vw, 64px); }
+        .contact-info { gap: 0; padding: clamp(24px, 4vw, 42px); background: linear-gradient(150deg, #0d5148, #12392f); border: 0; color: #fff; box-shadow: 0 22px 55px rgba(13,81,72,.18); }
+        .contact-info::before { content: 'LET’S CONNECT'; display: block; margin-bottom: 19px; color: #a7f3d0; font-size: .72rem; font-weight: 700; letter-spacing: .16em; }
+        .contact-item { gap: 16px; padding: 15px 0; border-bottom: 1px solid rgba(255,255,255,.13); }
+        .contact-icon { flex-basis: 44px; width: 44px; height: 44px; border-radius: 14px; color: #baf2dc; background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.16); box-shadow: none; }
+        .contact-icon img { width: 22px; height: 22px; object-fit: contain; border-radius: 0; filter: brightness(0) invert(1); }
+        .contact-text h4 { margin: 0 0 4px; color: rgba(255,255,255,.67); font-size: .72rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; }
+        .contact-text p, .contact-text p a { margin: 0; color: #fff; font-size: .98rem; font-weight: 500; overflow-wrap: anywhere; }
+        .contact-text a:hover { color: #a7f3d0; }
+        .social-links { gap: 11px; margin-top: auto; padding-top: 28px; }
+        .social-link { width: 44px; height: 44px; background: rgba(255,255,255,.96); border-color: rgba(255,255,255,.5); box-shadow: none; }
+        .contact-form { padding: clamp(24px, 4vw, 42px); border: 1px solid rgba(15,118,110,.1); border-radius: 22px; background: var(--card-light); box-shadow: 0 18px 50px rgba(15,35,32,.07); }
+        .contact-form-heading { margin-bottom: 27px; }
+        .contact-form-heading span { color: var(--primary-color); font-size: .68rem; font-weight: 700; letter-spacing: .15em; }
+        .contact-form-heading h3 { margin: 8px 0 5px; color: var(--text-dark); font-size: 1.55rem; letter-spacing: -.04em; }
+        .contact-form-heading p { margin: 0; color: #75827c; font-size: .9rem; }
+        .dark-mode .contact-form-heading p { color: #a5b7b0; }
+        .contact-form .form-group { margin-bottom: 18px; }
+        .contact-form label { margin-bottom: 7px; color: var(--text-dark); font-size: .8rem; font-weight: 600; }
+        .contact-form .form-control { min-height: 47px; padding: 12px 14px; border: 1px solid rgba(15,118,110,.16); border-radius: 12px; background: var(--bg-light); font: inherit; font-size: .9rem; }
+        .contact-form textarea.form-control { min-height: 132px; }
+        .contact-form .form-control:focus { border-color: var(--primary-color); box-shadow: 0 0 0 4px rgba(15,118,110,.1); }
+        .contact-form button[type="submit"] { min-width: 170px; margin-top: 3px; padding: 13px 22px; border-radius: 999px; }
+        .contact-form button[type="submit"]::after { content: '→'; margin-left: 12px; font-size: 1.1rem; }
+        .contact-form .form-status { margin-top: 12px; }
+        @media (max-width: 992px) {
+            #contact .section-title { text-align: center; }
+            #contact .section-title::after { left: 50%; transform: translateX(-50%); }
+        }
+        @media (max-width: 576px) {
+            .contact-info, .contact-form { border-radius: 18px; }
+            .contact-info { padding: 24px; }
+            .contact-form { padding: 24px 20px; }
+            .contact-text p, .contact-text p a { font-size: .9rem; }
+        }
+
+        /* Motion and compact footer */
+        @keyframes riseIn {
+            from { opacity: 0; transform: translateY(18px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .hero-content > * { animation: riseIn .7s cubic-bezier(.2,.7,.2,1) both; }
+        .hero-content > *:nth-child(1) { animation-delay: .08s; }
+        .hero-content > *:nth-child(2) { animation-delay: .18s; }
+        .hero-content > *:nth-child(3) { animation-delay: .28s; }
+        .hero-content > *:nth-child(4) { animation-delay: .38s; }
+        .contact-item { transition: transform .22s ease, border-color .22s ease; }
+        .contact-item:hover { transform: translateX(4px); }
+        footer { padding: 31px 0 14px; background: linear-gradient(115deg, #102d25, #174536); }
+        .footer-content { grid-template-columns: 1.15fr 1fr 1fr; gap: clamp(20px, 4vw, 54px); margin-bottom: 19px; }
+        .footer-column h3 { display: flex; align-items: center; gap: 9px; margin-bottom: 11px; padding: 0; font-size: .92rem; }
+        .footer-column h3::after { display: none; }
+        .footer-brand-mark { width: 30px; height: 30px; display: inline-block; overflow: hidden; border-radius: 50%; background: #050a12; box-shadow: 0 3px 9px rgba(0,0,0,.18); }
+        .footer-brand-mark img { display: block; width: 100%; height: 100%; object-fit: cover; }
+        .footer-column p { max-width: 270px; margin: 0; color: rgba(255,255,255,.68); font-size: .78rem; line-height: 1.65; }
+        .footer-links { flex-direction: row; flex-wrap: wrap; gap: 7px 16px; }
+        .footer-links a { color: rgba(255,255,255,.74); font-size: .76rem; }
+        .footer-links a:hover { color: #baf2dc; padding-left: 0; }
+        .footer-bottom { flex-direction: row; align-items: center; justify-content: space-between; padding-top: 12px; border-top-color: rgba(255,255,255,.14); }
+        .copyright-text { margin: 0; color: rgba(255,255,255,.56); font-size: .7rem; text-align: left; }
+        .footer-top { color: #baf2dc; font-size: .66rem; font-weight: 600; letter-spacing: .1em; }
+        .footer-content .footer-column { min-width: 0; }
+        .footer-column { opacity: 1 !important; transform: none !important; }
+        @media (max-width: 767px) {
+            footer { padding: 27px 0 13px; }
+            .footer-content { grid-template-columns: 1fr 1fr; gap: 22px 18px; margin-bottom: 17px; }
+            .footer-column:first-child { grid-column: 1 / -1; }
+            .footer-column:first-child p { max-width: 420px; }
+            .footer-links { gap: 7px 12px; }
+        }
+        @media (max-width: 420px) {
+            .footer-content { grid-template-columns: 1fr; gap: 18px; }
+            .footer-column:first-child { grid-column: auto; }
+            .footer-links { gap: 8px 14px; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .hero-content > *, .contact-item, .social-link { animation: none !important; transition: none !important; }
+            .hero-content > * { opacity: 1 !important; transform: none !important; }
+        }
     </style>
 </head>
 <body>
     <!-- Header -->
     <header>
         <div class="container header-container">
-            <a href="#" class="logo">luther mwinuka | it expert</a>
+            <a href="#home" class="logo" aria-label="Luther Mwinuka home">
+                <span class="logo-mark" aria-hidden="true"><img src="images/Mylogo.png" alt=""></span>
+                <span class="logo-name">Luther <span>Mwinuka</span></span>
+            </a>
             
             <nav>
                 <ul class="nav-links" id="primaryNavigation">
@@ -1908,6 +2158,7 @@
             </nav>
             
             <div class="header-actions">
+                <button class="theme-toggle" id="themeToggle" type="button" aria-label="Enable dark mode" title="Toggle color theme">&#9790;</button>
                 <button class="mobile-menu" id="mobileMenu" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="primaryNavigation">
                     <span class="hamburger-lines" aria-hidden="true"></span>
                 </button>
@@ -2376,18 +2627,17 @@
         <div class="container">
             <h2 class="section-title">Certificates & Achievements</h2>
             <div class="certificates-container">
-                <div class="certificate-card" data-file="certificates/A2English For Develop.png" data-type="image">
+                <div class="certificate-card">
                     <div class="certificate-img">
                         <img src="certificates/A2English For Develop.png" alt="A2 English for Developers (Beta)">
                     </div>
                     <div class="certificate-content">
                         <h3>A2 English for Developers (Beta)</h3>
                         <p>FreeCodeCamp</p>
-                        <a href="certificates/A2English For Develop.png" class="btn" target="_blank" rel="noopener noreferrer">View Certificate</a>
                     </div>
                 </div>
 
-                <div class="certificate-card" data-file="certificates/C++Programming.pdf" data-type="pdf">
+                <div class="certificate-card">
                     <div class="certificate-img">
                         <div class="certificate-placeholder">
                             <span class="pdf-badge">PDF</span>
@@ -2397,11 +2647,10 @@
                     <div class="certificate-content">
                         <h3>C++ Programming</h3>
                         <p>Sayor.org University</p>
-                        <a href="certificates/C++Programming.pdf" class="btn" target="_blank" rel="noopener noreferrer">View Certificate</a>
                     </div>
                 </div>
 
-                <div class="certificate-card" data-file="certificates/Data Analyst.pdf" data-type="pdf">
+                <div class="certificate-card">
                     <div class="certificate-img">
                         <div class="certificate-placeholder">
                             <span class="pdf-badge">PDF</span>
@@ -2411,11 +2660,10 @@
                     <div class="certificate-content">
                         <h3>Data Analyst</h3>
                         <p>Simplilearn SkillUp</p>
-                        <a href="certificates/Data Analyst.pdf" class="btn" target="_blank" rel="noopener noreferrer">View Certificate</a>
                     </div>
                 </div>
 
-                <div class="certificate-card" data-file="certificates/DataScienceEssentialswithPython.pdf" data-type="pdf">
+                <div class="certificate-card">
                     <div class="certificate-img">
                         <div class="certificate-placeholder">
                             <span class="pdf-badge">PDF</span>
@@ -2425,22 +2673,20 @@
                     <div class="certificate-content">
                         <h3>Data Science Essentials with Python</h3>
                         <p>CISCO Networking Academy</p>
-                        <a href="certificates/DataScienceEssentialswithPython.pdf" class="btn" target="_blank" rel="noopener noreferrer">View Certificate</a>
                     </div>
                 </div>
 
-                <div class="certificate-card" data-file="certificates/introduction_to_cip.png" data-type="image">
+                <div class="certificate-card">
                     <div class="certificate-img">
                         <img src="certificates/introduction_to_cip.png" alt="Introduction to Critical Infrastructure Protection">
                     </div>
                     <div class="certificate-content">
                         <h3>Introduction to Critical Infrastructure Protection</h3>
                         <p>OPSWAT Academy</p>
-                        <a href="certificates/introduction_to_cip.png" class="btn" target="_blank" rel="noopener noreferrer">View Certificate</a>
                     </div>
                 </div>
 
-                <div class="certificate-card" data-file="certificates/Modern Database System.pdf" data-type="pdf">
+                <div class="certificate-card">
                     <div class="certificate-img">
                         <div class="certificate-placeholder">
                             <span class="pdf-badge">PDF</span>
@@ -2450,11 +2696,10 @@
                     <div class="certificate-content">
                         <h3>Introduction to the Modern Database Systems</h3>
                         <p>OPSWAT Academy</p>
-                        <a href="certificates/Modern Database System.pdf" class="btn" target="_blank" rel="noopener noreferrer">View Certificate</a>
                     </div>
                 </div>
 
-                <div class="certificate-card" data-file="certificates/Networking.pdf" data-type="pdf">
+                <div class="certificate-card">
                     <div class="certificate-img">
                         <div class="certificate-placeholder">
                             <span class="pdf-badge">PDF</span>
@@ -2464,11 +2709,10 @@
                     <div class="certificate-content">
                         <h3>Networking Basics Course</h3>
                         <p>CISCO Networking Academy</p>
-                        <a href="certificates/Networking.pdf" class="btn" target="_blank" rel="noopener noreferrer">View Certificate</a>
                     </div>
                 </div>
 
-                <div class="certificate-card" data-file="certificates/NetworkingDevicesandBasicConfigUpdate20260828-21-7o2dea.pdf" data-type="pdf">
+                <div class="certificate-card">
                     <div class="certificate-img">
                         <div class="certificate-placeholder">
                             <span class="pdf-badge">PDF</span>
@@ -2478,11 +2722,10 @@
                     <div class="certificate-content">
                         <h3>Networking Devices &amp; Basic Configuration</h3>
                         <p>CISCO Networking Academy</p>
-                        <a href="certificates/NetworkingDevicesandBasicConfigUpdate20260828-21-7o2dea.pdf" class="btn" target="_blank" rel="noopener noreferrer">View Certificate</a>
                     </div>
                 </div>
 
-                <div class="certificate-card" data-file="certificates/PythonCertificate.pdf" data-type="pdf">
+                <div class="certificate-card">
                     <div class="certificate-img">
                         <div class="certificate-placeholder">
                             <span class="pdf-badge">PDF</span>
@@ -2492,8 +2735,27 @@
                     <div class="certificate-content">
                         <h3>Python Essentials 1</h3>
                         <p>CISCO Networking Academy</p>
-                        <a href="certificates/PythonCertificate.pdf" class="btn" target="_blank" rel="noopener noreferrer">View Certificate</a>
                     </div>
+                </div>
+                <div class="certificate-card">
+                    <div class="certificate-img"><div class="certificate-placeholder"><span class="pdf-badge">PDF</span><span class="pdf-text">Certificate</span></div></div>
+                    <div class="certificate-content"><h3>A2 English for Developers</h3><p>FreeCodeCamp · PDF edition</p></div>
+                </div>
+                <div class="certificate-card">
+                    <div class="certificate-img"><div class="certificate-placeholder"><span class="pdf-badge">PDF</span><span class="pdf-text">Certificate</span></div></div>
+                    <div class="certificate-content"><h3>Cybercrime</h3><p>Certificate</p></div>
+                </div>
+                <div class="certificate-card">
+                    <div class="certificate-img"><div class="certificate-placeholder"><span class="pdf-badge">PDF</span><span class="pdf-text">Certificate</span></div></div>
+                    <div class="certificate-content"><h3>Gender Issues</h3><p>Certificate</p></div>
+                </div>
+                <div class="certificate-card">
+                    <div class="certificate-img"><div class="certificate-placeholder"><span class="pdf-badge">PDF</span><span class="pdf-text">Certificate</span></div></div>
+                    <div class="certificate-content"><h3>Generative AI for Beginners</h3><p>Certificate</p></div>
+                </div>
+                <div class="certificate-card">
+                    <div class="certificate-img"><div class="certificate-placeholder"><span class="pdf-badge">PDF</span><span class="pdf-text">Certificate</span></div></div>
+                    <div class="certificate-content"><h3>Project Management</h3><p>Certificate</p></div>
                 </div>
             </div>
 
@@ -2519,7 +2781,7 @@
                 <div class="contact-info">
                     <div class="contact-item">
                         <div class="contact-icon">
-                            <img src="photo/location.png" alt="Location">
+                            <img src="images/location.png" alt="" aria-hidden="true">
                         </div>
                         <div class="contact-text">
                             <h4>Location</h4>
@@ -2529,7 +2791,7 @@
                     
                     <div class="contact-item">
                         <div class="contact-icon">
-                            <img src="photo/email.png" alt="Email">
+                            <img src="images/email.png" alt="" aria-hidden="true">
                         </div>
                         <div class="contact-text">
                             <h4>Email</h4>
@@ -2539,7 +2801,7 @@
                     
                     <div class="contact-item">
                         <div class="contact-icon">
-                            <img src="photo/contacts.png" alt="Phone contact">
+                            <img src="images/call.png" alt="" aria-hidden="true">
                         </div>
                         <div class="contact-text">
                             <h4>Phone</h4>
@@ -2565,6 +2827,11 @@
                 
                 <div class="contact-form">
                     <form id="contactForm" novalidate>
+                        <div class="contact-form-heading">
+                            <span>START A CONVERSATION</span>
+                            <h3>Send a message</h3>
+                            <p>Share a few details and I’ll get back to you.</p>
+                        </div>
                         <div class="form-group">
                             <label for="name">Your Name</label>
                             <input type="text" id="name" name="name" class="form-control" required>
@@ -2598,8 +2865,8 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-column">
-                    <h3>Luther Mwinuka</h3>
-                    <p>IT Expert & Full Stack Developer with a passion for creating innovative digital solutions that solve real-world problems.</p>
+                    <h3><span class="footer-brand-mark"><img src="images/Mylogo.png" alt=""></span> Luther Mwinuka</h3>
+                    <p>IT expert &amp; full stack developer building practical digital solutions.</p>
                 </div>
                 
                 <div class="footer-column">
@@ -2610,6 +2877,7 @@
                         <a href="#skills">Skills</a>
                         <a href="#experience">Experience</a>
                         <a href="#projects">Projects</a>
+                        <a href="#blog">Blog</a>
                         <a href="#certificates">Certificates</a>
                         <a href="#contact">Contact</a>
                     </div>
@@ -2657,19 +2925,28 @@
         </div>
     </div>
 
-    <!-- Lightbox -->
-    <div class="lightbox" id="lightbox">
-        <div class="lightbox-content">
-            <img src="" alt="" id="lightboxImg">
-            <span class="lightbox-close" id="lightboxClose">&times;</span>
-        </div>
-    </div>
+    <button class="back-to-top" id="backToTop" type="button" aria-label="Back to top" title="Back to top">&#8593;</button>
 
     <script>
         // Mobile Menu Toggle
         const mobileMenu = document.getElementById('mobileMenu');
         const navLinks = document.querySelector('.nav-links');
         const pageHeader = document.querySelector('header');
+        const themeToggle = document.getElementById('themeToggle');
+        const backToTop = document.getElementById('backToTop');
+
+        if (localStorage.getItem('portfolio-theme') === 'dark') document.body.classList.add('dark-mode');
+        function updateThemeButton() {
+            const dark = document.body.classList.contains('dark-mode');
+            themeToggle.innerHTML = dark ? '&#9728;' : '&#9790;';
+            themeToggle.setAttribute('aria-label', dark ? 'Enable light mode' : 'Enable dark mode');
+        }
+        updateThemeButton();
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            localStorage.setItem('portfolio-theme', document.body.classList.contains('dark-mode') ? 'dark' : 'light');
+            updateThemeButton();
+        });
 
         function setMobileMenu(open) {
             navLinks.classList.toggle('active', open);
@@ -2679,13 +2956,22 @@
 
         function updateHeaderStyle() {
             pageHeader.classList.toggle('scrolled', window.scrollY > 24);
+            backToTop.classList.toggle('visible', window.scrollY > 500);
         }
 
         updateHeaderStyle();
         window.addEventListener('scroll', updateHeaderStyle, { passive: true });
+        backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
         const navigationItems = document.querySelectorAll('.nav-links a');
         navigationItems[0].classList.add('active');
+        const navSectionObserver = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) return;
+                navigationItems.forEach(link => link.classList.toggle('active', link.getAttribute('href') === `#${entry.target.id}`));
+            });
+        }, { rootMargin: '-30% 0px -60% 0px' });
+        document.querySelectorAll('section[id]').forEach(section => navSectionObserver.observe(section));
 
         navigationItems.forEach(link => {
             link.addEventListener('click', () => {
@@ -2765,41 +3051,6 @@
                     }
                 }
             });
-        });
-        
-        // Lightbox for certificates
-        const certificateCards = document.querySelectorAll('.certificate-card');
-        const lightbox = document.getElementById('lightbox');
-        const lightboxImg = document.getElementById('lightboxImg');
-        const lightboxClose = document.getElementById('lightboxClose');
-        
-        certificateCards.forEach(card => {
-            card.addEventListener('click', (event) => {
-                if (event.target.closest('a')) return;
-
-                const cardImg = card.querySelector('img');
-                const cardFile = card.dataset.file;
-
-                if (cardImg) {
-                    lightboxImg.src = cardImg.src;
-                    lightbox.classList.add('active');
-                    return;
-                }
-
-                if (cardFile) {
-                    window.open(cardFile, '_blank', 'noopener,noreferrer');
-                }
-            });
-        });
-        
-        lightboxClose.addEventListener('click', () => {
-            lightbox.classList.remove('active');
-        });
-        
-        lightbox.addEventListener('click', (e) => {
-            if (e.target === lightbox) {
-                lightbox.classList.remove('active');
-            }
         });
         
         // Form Submission
@@ -3123,7 +3374,7 @@
 
         // Add scroll animation to cards inside each section.
         function checkScroll() {
-            const elements = document.querySelectorAll('.skill-category, .project-card, .blog-card, .certificate-card');
+            const elements = document.querySelectorAll('.skill-category, .project-card, .blog-card, .certificate-card, .contact-item');
             
             elements.forEach(element => {
                 const elementTop = element.getBoundingClientRect().top;
@@ -3137,10 +3388,17 @@
         }
         
         // Initialize elements with initial styles for animation
-        document.querySelectorAll('.skill-category, .project-card, .blog-card, .certificate-card').forEach(element => {
+        document.querySelectorAll('.skill-category, .project-card, .blog-card, .certificate-card, .contact-item').forEach((element, index) => {
+            if (reducedMotion) {
+                element.style.opacity = '1';
+                return;
+            }
             element.style.opacity = '0';
             element.style.transform = 'translateY(20px)';
-            element.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            element.style.transition = 'opacity 0.6s ease, transform 0.6s cubic-bezier(.2,.7,.2,1)';
+            if (element.classList.contains('contact-item')) {
+                element.style.transitionDelay = `${(index % 4) * 90}ms`;
+            }
         });
 
         document.querySelectorAll('.certificate-card').forEach((card, index) => {
