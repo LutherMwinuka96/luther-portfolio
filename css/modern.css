@@ -230,24 +230,35 @@ header.scrolled, .dark-mode header.scrolled {
     box-shadow: none;
 }
 .mobile-menu[aria-expanded="true"] .hamburger-lines { background: transparent !important; }
-.social-link { border: 0 !important; background: transparent !important; box-shadow: none !important; }
-.social-link:hover { background: transparent !important; transform: translateY(-3px) !important; }
+.social-links { gap: 16px; align-items: center; }
+.social-link {
+    display: grid !important;
+    width: 46px !important;
+    height: 46px !important;
+    flex: 0 0 46px;
+    place-items: center;
+    padding: 0 !important;
+    border: 0 !important;
+    border-radius: 50%;
+    background: transparent !important;
+    box-shadow: none !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+.social-link:hover { background: rgba(255,255,255,.1) !important; transform: translateY(-3px) !important; }
 .social-link i {
     display: block;
     font-family: 'Portfolio Font Awesome Brands' !important;
     font-style: normal;
     font-weight: 400;
-    font-size: 1.55rem;
+    font-size: 1.7rem;
     line-height: 1;
+    color: #fff !important;
+    text-shadow: 0 1px 9px rgba(0,0,0,.3);
     -webkit-font-smoothing: antialiased;
     transition: color .2s ease, transform .2s ease;
 }
-.social-link:nth-child(1) i { color: #0a66c2; }
-.social-link:nth-child(2) i { color: #d62976; }
-.social-link:nth-child(3) i { color: #263238; }
-.social-link:nth-child(4) i { color: #20b85a; }
-.social-link:hover i { transform: scale(1.13); }
-.dark-mode .social-link:nth-child(3) i { color: #f1f5f3; }
+.social-link:hover i { color: #d4ef6b !important; transform: scale(1.13); }
 .section-title::before { display: none !important; content: none !important; }
 
 /* A quieter, clearer footer with consistent spacing and readable link groups. */
