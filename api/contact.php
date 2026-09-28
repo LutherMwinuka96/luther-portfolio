@@ -27,6 +27,7 @@ $name = trim((string) ($payload['name'] ?? ''));
 $email = trim((string) ($payload['email'] ?? ''));
 $subject = trim((string) ($payload['subject'] ?? ''));
 $message = trim((string) ($payload['message'] ?? ''));
+$website = trim((string) ($payload['website'] ?? ''));
 
 if ($name === '' || $email === '' || $subject === '' || $message === '') {
     http_response_code(422);
@@ -46,11 +47,27 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     exit;
 }
 
+// Quietly accept and discard submissions caught by the hidden spam trap.
+if ($website !== '') {
+    http_response_code(201);
+    echo json_encode(['message' => 'Thank you! Your message has been sent.']);
+    exit;
+}
+
 require_once __DIR__ . '/../config/database.php';
 
 try {
     $database = new Database();
     $db = $database->getConnection();
+
+    $ipAddress = substr((string) ($_SERVER['REMOTE_ADDR'] ?? ''), 0, 45);
+    $rateCheck = $db->prepare('SELECT COUNT(*) FROM contact_messages WHERE ip_address = :ip_address AND created_at >= DATE_SUB(NOW(), INTERVAL 15 MINUTE)');
+    $rateCheck->execute([':ip_address' => $ipAddress]);
+    if ((int) $rateCheck->fetchColumn() >= 5) {
+        http_response_code(429);
+        echo json_encode(['message' => 'Please wait a few minutes before sending another message.']);
+        exit;
+    }
 
     $query = 'INSERT INTO contact_messages (name, email, subject, message, ip_address, user_agent)
               VALUES (:name, :email, :subject, :message, :ip_address, :user_agent)';
@@ -60,7 +77,7 @@ try {
         ':email' => $email,
         ':subject' => $subject,
         ':message' => $message,
-        ':ip_address' => substr((string) ($_SERVER['REMOTE_ADDR'] ?? ''), 0, 45),
+        ':ip_address' => $ipAddress,
         ':user_agent' => substr((string) ($_SERVER['HTTP_USER_AGENT'] ?? ''), 0, 65535),
     ]);
 

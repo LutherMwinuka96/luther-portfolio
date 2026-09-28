@@ -18,41 +18,10 @@
     <meta name="twitter:image" content="photo/luther.jpg">
     <title>Luther Mwinuka | Full Stack Developer & IT Expert</title>
     <link rel="icon" href="assets/favicon.png?v=2" type="image/png" sizes="128x128">
-    <link rel="stylesheet" href="assets/fontawesome/all.min.css">
+    <link rel="stylesheet" href="assets/fontawesome/all.min.css?v=3">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* Local fallback symbols keep the interface readable when icon CDN assets are offline. */
-        i[class*="fa-"] {
-            font-family: "Segoe UI Symbol", "Arial Unicode MS", sans-serif;
-            font-style: normal;
-            font-weight: 700;
-            line-height: 1;
-        }
-
-        .fa-moon::before { content: "☾"; }
-        .fa-sun::before { content: "☀"; }
-        .fa-bars::before { content: "☰"; }
-        .fa-times::before { content: "×"; }
-        .fa-user::before { content: "●"; }
-        .fa-briefcase::before { content: "▣"; }
-        .fa-map-marker-alt::before { content: "⌖"; }
-        .fa-location-dot::before { content: "⌖"; }
-        .fa-envelope::before { content: "✉"; }
-        .fa-lightbulb::before { content: "✦"; }
-        .fa-code::before { content: "</>"; font-family: Arial, sans-serif; font-size: 0.72em; }
-        .fa-server::before { content: "▤"; }
-        .fa-tools::before { content: "⚒"; }
-        .fa-certificate::before { content: "◆"; }
-        .fa-trophy::before { content: "♛"; }
-        .fa-phone::before { content: "☎"; }
-        .fa-linkedin-in::before { content: "in"; font-family: Arial, sans-serif; font-size: 0.78em; }
-        .fa-github::before { content: "◉"; }
-        .fa-twitter::before { content: "♥"; }
-        .fa-whatsapp::before { content: "◌"; }
-        .fa-robot::before { content: "🤖"; font-family: "Segoe UI Emoji", "Apple Color Emoji", sans-serif; }
-        .fa-paper-plane::before { content: "➤"; }
-
-        :root {
+:root {
             --primary-color: #4361ee;
             --secondary-color: #3a0ca3;
             --accent-color: #7209b7;
@@ -1351,6 +1320,8 @@
         .back-to-top { position: fixed; right: 24px; bottom: 24px; z-index: 900; width: 46px; height: 46px; display: grid; place-items: center; border: 1px solid rgba(15,118,110,.2); border-radius: 50%; color: #fff; background: var(--primary-color); box-shadow: 0 8px 22px rgba(15,35,32,.2); opacity: 0; visibility: hidden; transform: translateY(8px); transition: opacity .2s ease, transform .2s ease, visibility .2s ease; }
         .back-to-top.visible { opacity: 1; visibility: visible; transform: translateY(0); }
         .theme-toggle { width: 40px; height: 40px; padding: 0; display: grid; place-items: center; border: 1px solid rgba(15,118,110,.16); background: rgba(15,118,110,.06); font-size: 1rem; }
+        .language-toggle { min-width: 42px; height: 38px; padding: 0 10px; border: 1px solid rgba(15,118,110,.18); border-radius: 999px; background: transparent; color: var(--primary-color); font-size: .68rem; font-weight: 700; letter-spacing: .08em; cursor: pointer; transition: background .2s ease, color .2s ease, transform .2s ease; }
+        .language-toggle:hover { background: var(--primary-color); color: #fff; transform: translateY(-1px); }
         .dark-mode .theme-toggle { color: var(--text-dark); }
         .header-actions { gap: 10px; }
         .mobile-menu { border-radius: 50%; background: var(--card-light); box-shadow: none; }
@@ -1984,9 +1955,20 @@
         .project-img img { transition: transform .55s cubic-bezier(.2,.7,.2,1); }
         .project-card:hover .project-img img { transform: scale(1.045); }
         .project-content { padding: 24px; }
+        .project-case-study { display: grid; grid-template-columns: 1fr 1.4fr; gap: 4px 12px; margin: 18px 0; padding: 13px 15px; border-left: 3px solid var(--accent-color); border-radius: 0 12px 12px 0; background: rgba(15,118,110,.055); }
+        .project-case-study span { grid-column: 1; align-self: start; margin-top: 3px; color: var(--primary-color); font-size: .62rem; font-weight: 700; letter-spacing: .09em; }
+        .project-case-study p { grid-column: 2; margin: 0 0 5px; color: var(--text-dark); font-size: .76rem; line-height: 1.55; }
+        .dark-mode .project-case-study { background: rgba(94,234,212,.06); }
+        @media (max-width: 576px) { .project-case-study { grid-template-columns: 1fr; gap: 2px; } .project-case-study span, .project-case-study p { grid-column: 1; } .project-case-study span:not(:first-child) { margin-top: 7px; } }
         .project-tech span, .filter-btn { border-radius: 999px; }
         .filter-btn { padding: 9px 18px; background: var(--card-light); border: 1px solid rgba(15,118,110,.14); color: var(--text-dark); }
         .filter-btn.active { background: var(--primary-color); color: #fff; }
+        .project-search { display: flex; align-items: center; gap: 10px; min-width: min(100%, 250px); padding: 0 12px; border: 1px solid rgba(15,118,110,.16); border-radius: 999px; background: var(--card-light); color: var(--text-light); }
+        .project-search:focus-within { border-color: var(--primary-color); box-shadow: 0 0 0 3px rgba(15,118,110,.1); }
+        .project-search input { width: 100%; min-width: 0; padding: 9px 0; border: 0; outline: 0; background: transparent; color: var(--text-dark); }
+        .project-search kbd { padding: 2px 6px; border: 1px solid rgba(15,118,110,.16); border-radius: 5px; font: 11px/1.5 monospace; }
+        .project-results { min-height: 1.4em; margin: -17px 0 24px; text-align: center; color: var(--text-light); font-size: .82rem; }
+        .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
         .contact-form { padding: clamp(22px, 4vw, 38px); background: var(--card-light); }
         input, textarea, select { border-radius: 12px !important; }
         :focus-visible { outline: 3px solid rgba(249,115,22,.7); outline-offset: 3px; }
@@ -2045,7 +2027,7 @@
         }
         @media (max-width: 576px) {
             .header-container { padding-left: 17px; padding-right: 17px; }
-            .logo { max-width: calc(100vw - 130px); }
+            .logo { max-width: calc(100vw - 190px); }
             .logo-name { overflow: hidden; text-overflow: ellipsis; }
         }
 
@@ -2079,6 +2061,8 @@
         .contact-form button[type="submit"] { min-width: 170px; margin-top: 3px; padding: 13px 22px; border-radius: 999px; }
         .contact-form button[type="submit"]::after { content: '→'; margin-left: 12px; font-size: 1.1rem; }
         .contact-form .form-status { margin-top: 12px; }
+        .form-honeypot { position: absolute !important; left: -10000px !important; width: 1px; height: 1px; overflow: hidden; }
+        .contact-form button[type="submit"]:disabled { opacity: .72; cursor: wait; transform: none; }
         @media (max-width: 992px) {
             #contact .section-title { text-align: center; }
             #contact .section-title::after { left: 50%; transform: translateX(-50%); }
@@ -2134,17 +2118,18 @@
             .hero-content > * { opacity: 1 !important; transform: none !important; }
         }
     </style>
+    <link rel="stylesheet" href="css/modern.css?v=3">
 </head>
 <body>
     <!-- Header -->
     <header>
         <div class="container header-container">
             <a href="#home" class="logo" aria-label="Luther Mwinuka home">
-                <span class="logo-mark" aria-hidden="true"><img src="images/Mylogo.png" alt=""></span>
+                <span class="logo-mark" aria-hidden="true"><img src="images/Mylogo-small.jpg" alt="" width="320" height="320" fetchpriority="high"></span>
                 <span class="logo-name">Luther <span>Mwinuka</span></span>
             </a>
             
-            <nav>
+            <nav aria-label="Primary navigation">
                 <ul class="nav-links" id="primaryNavigation">
                     <li><a href="#home">Home</a></li>
                     <li><a href="#about">About</a></li>
@@ -2159,6 +2144,7 @@
             
             <div class="header-actions">
                 <button class="theme-toggle" id="themeToggle" type="button" aria-label="Enable dark mode" title="Toggle color theme">&#9790;</button>
+                <button class="language-toggle" id="languageToggle" type="button" aria-label="Switch to Swahili" title="Change language">SW</button>
                 <button class="mobile-menu" id="mobileMenu" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="primaryNavigation">
                     <span class="hamburger-lines" aria-hidden="true"></span>
                 </button>
@@ -2190,10 +2176,10 @@
             <div class="about-content">
                 <div class="about-profile">
                     <div class="about-img">
-                        <img src="photo/luther.jpg" alt="Luther Mwinuka">
+                        <img src="photo/luther.jpg" alt="Portrait of Luther Mwinuka" loading="lazy" decoding="async" width="260" height="260">
                     </div>
                     <div class="about-badges">
-                        <span class="badge">5+ Years Experience</span>
+                        <span class="badge">3+ Years Experience</span>
                         <span class="badge">AWS Certified</span>
                     </div>
                     <div class="facts-table">
@@ -2464,6 +2450,9 @@
                     <li>A2 English for Developers (Beta) – FreeCodeCamp</li>
                     <li>Introduction to the Modern Database Systems – OPSWAT Academy</li>
                     <li>Introduction to Critical Infrastructure Protection – OPSWAT Academy</li>
+                    <li>Cybercrime – Simplilearn SkillUp</li>
+                    <li>Generative AI for Beginners – Simplilearn SkillUp</li>
+                    <li>Project Management 101 – Simplilearn SkillUp</li>
                 </ul>
             </div>
         </div>
@@ -2476,21 +2465,35 @@
             <div class="timeline">
                 <article class="timeline-item">
                     <div class="timeline-card">
-                        <span class="timeline-label">Professional Focus</span>
-                        <h3>Full Stack Development &amp; IT Solutions</h3>
-                        <p>Building practical web applications, data-driven systems, and digital tools that improve workflows and solve real-world problems.</p>
+                        <span class="timeline-label">Jun 2025 – Nov 2026</span>
+                        <h3>IT Support Officer · Mbeya City Council</h3>
+                        <p>Maintained computer systems and networks, supported staff, and improved the reliability and accessibility of ICT services.</p>
                     </div>
                 </article>
                 <article class="timeline-item">
                     <div class="timeline-card">
-                        <span class="timeline-label">Academic Foundation</span>
+                        <span class="timeline-label">Jan 2023 – Present</span>
+                        <h3>ICT Technician · Rural Development Organization</h3>
+                        <p>Developed and maintained the RDOMMS, supported data collection and reporting, troubleshot system issues, and trained users.</p>
+                    </div>
+                </article>
+                <article class="timeline-item">
+                    <div class="timeline-card">
+                        <span class="timeline-label">Jun 2024 – Nov 2024</span>
+                        <h3>IT Consultant · Mbeya Zonal Referral Hospital</h3>
+                        <p>Supported computer systems and networks, hospital information systems, data backups, and staff training.</p>
+                    </div>
+                </article>
+                <article class="timeline-item">
+                    <div class="timeline-card">
+                        <span class="timeline-label">Oct 2023 – Expected Dec 2026</span>
                         <h3>Bachelor of Information Technology</h3>
-                        <p>Kampala International University — with a foundation in software development, databases, networking, and information systems.</p>
+                        <p>Kampala International University, Dar es Salaam.</p>
                     </div>
                 </article>
                 <article class="timeline-item">
                     <div class="timeline-card">
-                        <span class="timeline-label">Continuous Learning</span>
+                        <span class="timeline-label">Ongoing</span>
                         <h3>Technical Certifications</h3>
                         <p>Continued training in networking, Python, data science, data analysis, databases, and critical infrastructure protection.</p>
                     </div>
@@ -2505,67 +2508,198 @@
             <h2 class="section-title">My Projects</h2>
             
             <div class="project-filters">
-                <button class="filter-btn active" data-filter="all">All</button>
-                <button class="filter-btn" data-filter="web">Web Development</button>
-                <button class="filter-btn" data-filter="mobile">Mobile Apps</button>
-                <button class="filter-btn" data-filter="design">UI/UX Design</button>
+                <label class="project-search" for="projectSearch">
+                    <span class="sr-only">Search projects</span>
+                    <i class="fas fa-search" aria-hidden="true"></i>
+                    <input id="projectSearch" type="search" placeholder="Search projects..." autocomplete="off" aria-describedby="projectResults">
+                    <kbd>/</kbd>
+                </label>
+                <button class="filter-btn active" data-filter="all" aria-pressed="true">All</button>
+                <button class="filter-btn" data-filter="web" aria-pressed="false">Web Apps</button>
+                <button class="filter-btn" data-filter="api" aria-pressed="false">APIs</button>
+                <button class="filter-btn" data-filter="learning" aria-pressed="false">Learning Projects</button>
             </div>
+            <p class="project-results" id="projectResults" role="status" aria-live="polite"></p>
             
             <div class="projects-grid">
                 <div class="project-card" data-category="web">
                     <div class="project-img">
-                        <img src="projects/RDOMMS.png" alt="RDOMMS rural development monitoring and management system">
+                        <img src="projects/RDOMMS-optimized.jpg" alt="RDOMMS rural development monitoring and management system" loading="lazy" decoding="async">
                     </div>
                     <div class="project-content">
                         <h3>RDOMMS</h3>
                         <p>A rural development organization monitoring and management system for tracking beneficiaries, projects, progress, and reports.</p>
+                        <details class="project-case-study"><summary>Project details</summary><div class="project-case-study-body"><span>PROJECT FOCUS</span><p>Beneficiary records, project progress, and reporting workflows.</p><span>CONTRIBUTION</span><p>System development, maintenance, data support, and user training.</p></div></details>
                         <div class="project-tech">
                             <span class="tech-tag">Web Application</span>
                             <span class="tech-tag">Monitoring</span>
                             <span class="tech-tag">Reporting</span>
                         </div>
                         <div class="project-links">
-                            <a href="https://github.com/LutherMwinuka96" class="btn" target="_blank" rel="noopener noreferrer">GitHub Profile</a>
-                            <a href="#contact" class="btn">Request Demo</a>
+                            <a href="https://github.com/LutherMwinuka96/RDOMMS" class="btn" target="_blank" rel="noopener noreferrer" aria-label="View the RDOMMS source repository on GitHub">View source <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
+                            
                         </div>
                     </div>
                 </div>
                 
-                <div class="project-card" data-category="mobile">
+                <div class="project-card" data-category="web">
                     <div class="project-img">
-                        <img src="projects/Detection system.png" alt="KIUT fake review detection system">
+                        <img src="projects/Detection-system-optimized.jpg" alt="KIUT fake review detection system" loading="lazy" decoding="async">
                     </div>
                     <div class="project-content">
                         <h3>KIUT Review Detector</h3>
-                        <p>A fake review detection system that uses NLP and machine learning to classify academic reviews as genuine or fake.</p>
+                        <p>A full-stack KIUT system that classifies academic reviews as genuine or fake using a Python machine-learning service.</p>
+                        <details class="project-case-study"><summary>Project details</summary><div class="project-case-study-body"><span>PROJECT FOCUS</span><p>Classifying academic feedback to flag suspicious reviews.</p><span>APPROACH</span><p>Natural language processing and machine learning.</p></div></details>
                         <div class="project-tech">
-                            <span class="tech-tag">Machine Learning</span>
-                            <span class="tech-tag">NLP</span>
-                            <span class="tech-tag">Web Application</span>
+                            <span class="tech-tag">PHP</span>
+                            <span class="tech-tag">Python / Flask</span>
+                            <span class="tech-tag">NLP / scikit-learn</span>
                         </div>
                         <div class="project-links">
-                            <a href="https://github.com/LutherMwinuka96" class="btn" target="_blank" rel="noopener noreferrer">GitHub Profile</a>
-                            <a href="#contact" class="btn">Request Demo</a>
+                            <a href="https://github.com/LutherMwinuka96/Detection-System" class="btn" target="_blank" rel="noopener noreferrer" aria-label="View the KIUT Review Detector source repository on GitHub">View source <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
+                            
                         </div>
                     </div>
                 </div>
                 
-                <div class="project-card" data-category="design">
+                <div class="project-card" data-category="web">
                     <div class="project-img">
-                        <img src="projects/Eventrix campus.png" alt="Eventrix Campus event platform">
+                        <img src="projects/Eventrix-campus-optimized.jpg" alt="Eventrix Campus event platform" loading="lazy" decoding="async">
                     </div>
                     <div class="project-content">
                         <h3>Eventrix Campus</h3>
                         <p>A campus event platform for publishing, registering, and tracking events through one unified dashboard.</p>
+                        <details class="project-case-study"><summary>Project details</summary><div class="project-case-study-body"><span>PROJECT FOCUS</span><p>Campus event discovery, registration, and participation tracking.</p><span>CORE WORKFLOW</span><p>Publish events and manage registrations from a shared dashboard.</p></div></details>
                         <div class="project-tech">
                             <span class="tech-tag">Event Management</span>
                             <span class="tech-tag">Dashboard</span>
                             <span class="tech-tag">Web Application</span>
                         </div>
                         <div class="project-links">
-                            <a href="https://github.com/LutherMwinuka96" class="btn" target="_blank" rel="noopener noreferrer">GitHub Profile</a>
-                            <a href="#contact" class="btn">Request Demo</a>
+                            <a href="https://github.com/LutherMwinuka96/Eventrix" class="btn" target="_blank" rel="noopener noreferrer" aria-label="View the Eventrix source repository on GitHub">View source <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
+                            
                         </div>
+                    </div>
+                </div>
+
+                <div class="project-card" data-category="web">
+                    <div class="project-img project-art art-user-management" aria-hidden="true"><span class="art-kicker">FULL STACK</span><i class="fas fa-users"></i><span class="art-title">User Directory</span></div>
+                    <div class="project-content">
+                        <h3>User Management Dashboard</h3>
+                        <p>A responsive user administration dashboard backed by a REST API and MySQL database.</p>
+                        <details class="project-case-study"><summary>Project details</summary><div class="project-case-study-body"><span>CORE FEATURES</span><p>Search, pagination, CSV export, validation, and user CRUD.</p><span>ARCHITECTURE</span><p>React frontend connected to an Express API and MySQL.</p></div></details>
+                        <div class="project-tech"><span class="tech-tag">React</span><span class="tech-tag">Node.js</span><span class="tech-tag">Express</span><span class="tech-tag">MySQL</span></div>
+                        <div class="project-links"><a href="https://github.com/LutherMwinuka96/User-Management-Full-Stack-App" class="btn" target="_blank" rel="noopener noreferrer" aria-label="View User Management Dashboard source repository on GitHub">View source <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i></a></div>
+                    </div>
+                </div>
+
+                <div class="project-card" data-category="web">
+                    <div class="project-img project-art art-store" aria-hidden="true"><span class="art-kicker">NOVA / STOREFRONT</span><i class="fas fa-bag-shopping"></i><span class="art-title">Everyday, thoughtfully chosen.</span></div>
+                    <div class="project-content">
+                        <h3>Modern E-Commerce Store</h3>
+                        <p>A responsive storefront concept with a searchable, filterable product catalog and shopping interactions.</p>
+                        <details class="project-case-study"><summary>Project details</summary><div class="project-case-study-body"><span>SHOPPING TOOLS</span><p>Product search, category filters, sorting, cart counter, and wishlist.</p><span>INTERFACE</span><p>Promotional landing page with responsive product catalog.</p></div></details>
+                        <div class="project-tech"><span class="tech-tag">HTML / CSS</span><span class="tech-tag">Bootstrap</span><span class="tech-tag">JavaScript</span></div>
+                        <div class="project-links"><a href="https://github.com/LutherMwinuka96/Modern-E-Commerce-Store" class="btn" target="_blank" rel="noopener noreferrer" aria-label="View Modern E-Commerce Store source repository on GitHub">View source <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i></a></div>
+                    </div>
+                </div>
+
+                <div class="project-card" data-category="web">
+                    <div class="project-img project-art art-task-manager" aria-hidden="true"><span class="art-kicker">TASKFLOW / PRODUCTIVITY</span><i class="fas fa-list-check"></i><span class="art-title">Make room for focused work.</span></div>
+                    <div class="project-content">
+                        <h3>React Task Manager</h3>
+                        <p>A task manager for organizing work with status and priority controls, search, and saved progress.</p>
+                        <details class="project-case-study"><summary>Project details</summary><div class="project-case-study-body"><span>CORE FEATURES</span><p>Create, edit, complete, restore, and delete tasks.</p><span>WORKFLOW</span><p>Filter by status or priority and sort the task list.</p></div></details>
+                        <div class="project-tech"><span class="tech-tag">React</span><span class="tech-tag">Vite</span><span class="tech-tag">JavaScript</span><span class="tech-tag">LocalStorage</span></div>
+                        <div class="project-links"><a href="https://github.com/LutherMwinuka96/React-Task-Manager" class="btn" target="_blank" rel="noopener noreferrer" aria-label="View React Task Manager source repository on GitHub">View source <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i></a></div>
+                    </div>
+                </div>
+
+                <div class="project-card" data-category="api">
+                    <div class="project-img project-art art-api" aria-hidden="true"><span class="art-kicker">USER API / MYSQL</span><i class="fas fa-code"></i><span class="art-title">Reliable REST endpoints.</span></div>
+                    <div class="project-content">
+                        <h3>User Management REST API</h3>
+                        <p>A JSON API for user records with MySQL persistence, input checks, and consistent response handling.</p>
+                        <details class="project-case-study"><summary>Project details</summary><div class="project-case-study-body"><span>API OPERATIONS</span><p>Create, list, retrieve, update, and delete user records.</p><span>VALIDATION</span><p>Checks required fields, email format, age, and duplicate email.</p></div></details>
+                        <div class="project-tech"><span class="tech-tag">Node.js</span><span class="tech-tag">Express</span><span class="tech-tag">MySQL</span><span class="tech-tag">REST API</span></div>
+                        <div class="project-links"><a href="https://github.com/LutherMwinuka96/User-Management-REST-API" class="btn" target="_blank" rel="noopener noreferrer" aria-label="View User Management REST API source repository on GitHub">View source <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i></a></div>
+                    </div>
+                </div>
+
+                <div class="project-card" data-category="api">
+                    <div class="project-img project-art art-api-alt" aria-hidden="true"><span class="art-kicker">TASK 5 / BACKEND</span><i class="fas fa-database"></i><span class="art-title">Structured data. Clear responses.</span></div>
+                    <div class="project-content">
+                        <h3>User Management REST API 2</h3>
+                        <p>A second iteration of the user API, with SQL-backed CRUD operations and environment-based configuration.</p>
+                        <details class="project-case-study"><summary>Project details</summary><div class="project-case-study-body"><span>CORE FEATURES</span><p>MySQL connection pool, parameterized queries, and JSON endpoints.</p><span>ERROR HANDLING</span><p>Validation and consistent handling for malformed requests and routes.</p></div></details>
+                        <div class="project-tech"><span class="tech-tag">Node.js</span><span class="tech-tag">Express</span><span class="tech-tag">MySQL</span><span class="tech-tag">dotenv</span></div>
+                        <div class="project-links"><a href="https://github.com/LutherMwinuka96/User-Management-REST-API2" class="btn" target="_blank" rel="noopener noreferrer" aria-label="View User Management REST API 2 source repository on GitHub">View source <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i></a></div>
+                    </div>
+                </div>
+
+                <div class="project-card" data-category="learning">
+                    <div class="project-img project-art art-flashcards" aria-hidden="true"><span class="art-kicker">STUDY / QUICK QUIZ</span><i class="fas fa-clone"></i><span class="art-title">Learn one card at a time.</span></div>
+                    <div class="project-content">
+                        <h3>Flashcard Quiz App</h3>
+                        <p>A study tool with interactive question-and-answer cards, navigation, and simple customization.</p>
+                        <details class="project-case-study"><summary>Project details</summary><div class="project-case-study-body"><span>STUDY FLOW</span><p>Review prompts and answers with controls to move through a quiz.</p><span>PROJECT</span><p>Built as an interactive CodeAlpha internship exercise.</p></div></details>
+                        <div class="project-tech"><span class="tech-tag">HTML</span><span class="tech-tag">CSS</span><span class="tech-tag">JavaScript</span></div>
+                        <div class="project-links"><a href="https://github.com/LutherMwinuka96/CodeAlpha_FlashcardQuizApp" class="btn" target="_blank" rel="noopener noreferrer" aria-label="View Flashcard Quiz App source repository on GitHub">View source <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i></a></div>
+                    </div>
+                </div>
+
+                <div class="project-card" data-category="learning">
+                    <div class="project-img project-art art-quotes" aria-hidden="true"><span class="art-kicker">DAILY WORDS</span><i class="fas fa-quote-left"></i><span class="art-title">“A little inspiration.”</span></div>
+                    <div class="project-content">
+                        <h3>Random Quote Generator</h3>
+                        <p>A lightweight web project that presents a changing quote through a simple interactive interface.</p>
+                        <details class="project-case-study"><summary>Project details</summary><div class="project-case-study-body"><span>INTERACTION</span><p>Generate and display quotes in the browser.</p><span>PROJECT</span><p>Small front-end exercise built with HTML, CSS, and JavaScript.</p></div></details>
+                        <div class="project-tech"><span class="tech-tag">HTML</span><span class="tech-tag">CSS</span><span class="tech-tag">JavaScript</span></div>
+                        <div class="project-links"><a href="https://github.com/LutherMwinuka96/CodeAlpha_RandomQuoteGenerator" class="btn" target="_blank" rel="noopener noreferrer" aria-label="View Random Quote Generator source repository on GitHub">View source <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i></a></div>
+                    </div>
+                </div>
+
+                <div class="project-card" data-category="web">
+                    <div class="project-img project-art art-portfolio" aria-hidden="true"><span class="art-kicker">PORTFOLIO / TEMPLATE</span><i class="fas fa-laptop-code"></i><span class="art-title">A developer portfolio concept.</span></div>
+                    <div class="project-content">
+                        <h3>Portfolio Template</h3>
+                        <p>A responsive single-page portfolio template with profile, skills, project cards, and contact form sections.</p>
+                        <details class="project-case-study"><summary>Project details</summary><div class="project-case-study-body"><span>PAGE SECTIONS</span><p>Introduction, skills, services, projects, and contact form.</p><span>NOTE</span><p>Template repository; sample profile content is included.</p></div></details>
+                        <div class="project-tech"><span class="tech-tag">HTML</span><span class="tech-tag">Bootstrap</span><span class="tech-tag">CSS</span><span class="tech-tag">JavaScript</span></div>
+                        <div class="project-links"><a href="https://github.com/LutherMwinuka96/Portfolio1" class="btn" target="_blank" rel="noopener noreferrer" aria-label="View Portfolio Template source repository on GitHub">View source <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i></a></div>
+                    </div>
+                </div>
+
+                <div class="project-card" data-category="learning">
+                    <div class="project-img project-art art-translate" aria-hidden="true"><span class="art-kicker">LANGUAGE / TRANSLATE</span><i class="fas fa-language"></i><span class="art-title">Words across languages.</span></div>
+                    <div class="project-content">
+                        <h3>Language Translation Tool</h3>
+                        <p>A simple translation interface for working with text between multiple languages through translation APIs.</p>
+                        <details class="project-case-study"><summary>Project details</summary><div class="project-case-study-body"><span>USER FLOW</span><p>Enter text, choose languages, and request a translation.</p><span>PROJECT</span><p>Built as a CodeAlpha internship project.</p></div></details>
+                        <div class="project-tech"><span class="tech-tag">HTML</span><span class="tech-tag">CSS</span><span class="tech-tag">JavaScript</span><span class="tech-tag">Translation API</span></div>
+                        <div class="project-links"><a href="https://github.com/LutherMwinuka96/CodeAlpha_LanguageTranslationTool" class="btn" target="_blank" rel="noopener noreferrer" aria-label="View Language Translation Tool source repository on GitHub">View source <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i></a></div>
+                    </div>
+                </div>
+
+                <div class="project-card" data-category="learning">
+                    <div class="project-img project-art art-chatbot" aria-hidden="true"><span class="art-kicker">SHOPEASE / HELP DESK</span><i class="fas fa-comments"></i><span class="art-title">Answers, when you need them.</span></div>
+                    <div class="project-content">
+                        <h3>FAQ Chatbot</h3>
+                        <p>A question-answer assistant that matches customer questions against an FAQ knowledge base.</p>
+                        <details class="project-case-study"><summary>Project details</summary><div class="project-case-study-body"><span>LANGUAGE PIPELINE</span><p>Text cleaning, tokenization, synonym mapping, and stemming.</p><span>ANSWER MATCHING</span><p>TF-IDF vectors ranked with cosine similarity.</p></div></details>
+                        <div class="project-tech"><span class="tech-tag">Python</span><span class="tech-tag">NLTK</span><span class="tech-tag">scikit-learn</span><span class="tech-tag">JavaScript</span></div>
+                        <div class="project-links"><a href="https://github.com/LutherMwinuka96/CodeAlpha_ChatbotForFAQs" class="btn" target="_blank" rel="noopener noreferrer" aria-label="View FAQ Chatbot source repository on GitHub">View source <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i></a></div>
+                    </div>
+                </div>
+
+                <div class="project-card" data-category="web">
+                    <div class="project-img project-art art-portfolio-live" aria-hidden="true"><span class="art-kicker">PERSONAL WEBSITE</span><i class="fas fa-id-card"></i><span class="art-title">Luther Mwinuka / Portfolio</span></div>
+                    <div class="project-content">
+                        <h3>Personal Portfolio Website</h3>
+                        <p>This portfolio site, with project showcases, professional profile, certificates, and a contact form.</p>
+                        <details class="project-case-study"><summary>Project details</summary><div class="project-case-study-body"><span>FEATURES</span><p>Projects, skills, experience, certificates, blog, and theme/language controls.</p><span>STACK</span><p>HTML, CSS, JavaScript, and PHP-backed contact/API endpoints.</p></div></details>
+                        <div class="project-tech"><span class="tech-tag">HTML / CSS</span><span class="tech-tag">JavaScript</span><span class="tech-tag">PHP</span></div>
+                        <div class="project-links"><a href="https://github.com/LutherMwinuka96/luther-portfolio" class="btn" target="_blank" rel="noopener noreferrer" aria-label="View Personal Portfolio Website source repository on GitHub">View source <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i></a><a href="https://luther-portfolio.vercel.app" class="btn" target="_blank" rel="noopener noreferrer">Live site <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i></a></div>
                     </div>
                 </div>
             </div>
@@ -2579,7 +2713,7 @@
             <div class="blog-grid">
                 <div class="blog-card">
                     <div class="blog-img">
-                        <img src="projects/RDOMMS.png" alt="RDOMMS monitoring and reporting system">
+                        <img src="projects/RDOMMS-optimized.jpg" alt="RDOMMS monitoring and reporting system" loading="lazy" decoding="async">
                     </div>
                     <div class="blog-content">
                         <div class="blog-meta">
@@ -2593,7 +2727,7 @@
                 
                 <div class="blog-card">
                     <div class="blog-img">
-                        <img src="projects/Detection system.png" alt="Fake review detection system">
+                        <img src="projects/Detection-system-optimized.jpg" alt="Fake review detection system" loading="lazy" decoding="async">
                     </div>
                     <div class="blog-content">
                         <div class="blog-meta">
@@ -2607,7 +2741,7 @@
                 
                 <div class="blog-card">
                     <div class="blog-img">
-                        <img src="projects/Eventrix campus.png" alt="Eventrix Campus event platform">
+                        <img src="projects/Eventrix-campus-optimized.jpg" alt="Eventrix Campus event platform" loading="lazy" decoding="async">
                     </div>
                     <div class="blog-content">
                         <div class="blog-meta">
@@ -2629,7 +2763,7 @@
             <div class="certificates-container">
                 <div class="certificate-card">
                     <div class="certificate-img">
-                        <img src="certificates/A2English For Develop.png" alt="A2 English for Developers (Beta)">
+                        <img src="certificates/A2English For Develop.png" alt="A2 English for Developers (Beta)" loading="lazy" decoding="async" width="800" height="560">
                     </div>
                     <div class="certificate-content">
                         <h3>A2 English for Developers (Beta)</h3>
@@ -2678,7 +2812,7 @@
 
                 <div class="certificate-card">
                     <div class="certificate-img">
-                        <img src="certificates/introduction_to_cip.png" alt="Introduction to Critical Infrastructure Protection">
+                        <img src="certificates/introduction_to_cip.png" alt="Introduction to Critical Infrastructure Protection" loading="lazy" decoding="async" width="800" height="560">
                     </div>
                     <div class="certificate-content">
                         <h3>Introduction to Critical Infrastructure Protection</h3>
@@ -2781,7 +2915,7 @@
                 <div class="contact-info">
                     <div class="contact-item">
                         <div class="contact-icon">
-                            <img src="images/location.png" alt="" aria-hidden="true">
+                            <img src="images/location.png" alt="" aria-hidden="true" loading="lazy" decoding="async" width="22" height="22">
                         </div>
                         <div class="contact-text">
                             <h4>Location</h4>
@@ -2791,7 +2925,7 @@
                     
                     <div class="contact-item">
                         <div class="contact-icon">
-                            <img src="images/email.png" alt="" aria-hidden="true">
+                            <img src="images/email.png" alt="" aria-hidden="true" loading="lazy" decoding="async" width="22" height="22">
                         </div>
                         <div class="contact-text">
                             <h4>Email</h4>
@@ -2801,7 +2935,7 @@
                     
                     <div class="contact-item">
                         <div class="contact-icon">
-                            <img src="images/call.png" alt="" aria-hidden="true">
+                            <img src="images/call.png" alt="" aria-hidden="true" loading="lazy" decoding="async" width="22" height="22">
                         </div>
                         <div class="contact-text">
                             <h4>Phone</h4>
@@ -2811,22 +2945,26 @@
                     
                     <div class="social-links">
                         <a href="https://www.linkedin.com/in/luther-mwinuka-565765304" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-                            <img src="photo/linkedin.jpg" alt="LinkedIn">
+                            <i class="fa-brands fa-linkedin-in" aria-hidden="true"></i>
                         </a>
                         <a href="https://www.instagram.com/mr.lutherking_?igsi=MTU5YjV3MHFvN3FzZA==" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-                            <img src="photo/instagram.jpg" alt="Instagram">
+                            <i class="fa-brands fa-instagram" aria-hidden="true"></i>
                         </a>
                         <a href="https://github.com/LutherMwinuka96" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-                            <img src="photo/github.png" alt="GitHub">
+                            <i class="fa-brands fa-github" aria-hidden="true"></i>
                         </a>
                         <a href="https://wa.me/255767630105" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp">
-                            <img src="photo/whatsapp.png" alt="WhatsApp">
+                            <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
                         </a>
                     </div>
                 </div>
                 
                 <div class="contact-form">
                     <form id="contactForm" novalidate>
+                        <div class="form-honeypot" aria-hidden="true">
+                            <label for="website">Leave this field empty</label>
+                            <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+                        </div>
                         <div class="contact-form-heading">
                             <span>START A CONVERSATION</span>
                             <h3>Send a message</h3>
@@ -2834,26 +2972,27 @@
                         </div>
                         <div class="form-group">
                             <label for="name">Your Name</label>
-                            <input type="text" id="name" name="name" class="form-control" required>
+                            <input type="text" id="name" name="name" class="form-control" autocomplete="name" maxlength="255" required>
                         </div>
                         
                         <div class="form-group">
                             <label for="email">Your Email</label>
-                            <input type="email" id="email" name="email" class="form-control" required>
+                            <input type="email" id="email" name="email" class="form-control" autocomplete="email" maxlength="255" required>
                         </div>
                         
                         <div class="form-group">
                             <label for="subject">Subject</label>
-                            <input type="text" id="subject" name="subject" class="form-control" required>
+                            <input type="text" id="subject" name="subject" class="form-control" maxlength="500" required>
                         </div>
                         
                         <div class="form-group">
                             <label for="message">Your Message</label>
-                            <textarea id="message" name="message" class="form-control" required></textarea>
+                            <textarea id="message" name="message" class="form-control" maxlength="5000" required></textarea>
                         </div>
                         
                         <button type="submit" class="btn">Send Message</button>
                         <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
+                        <p class="form-privacy">I’ll use your details only to respond to your message.</p>
                     </form>
                 </div>
             </div>
@@ -2865,7 +3004,7 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-column">
-                    <h3><span class="footer-brand-mark"><img src="images/Mylogo.png" alt=""></span> Luther Mwinuka</h3>
+                    <h3><span class="footer-brand-mark"><img src="images/Mylogo-small.jpg" alt="" width="320" height="320" loading="lazy" decoding="async"></span> Luther Mwinuka</h3>
                     <p>IT expert &amp; full stack developer building practical digital solutions.</p>
                 </div>
                 
@@ -2904,7 +3043,7 @@
 
     <!-- AI Chat Assistant -->
     <div class="chat-assistant" id="chatAssistant" title="Open AI Assistant" aria-label="Open AI Assistant">
-        <i class="fas fa-robot"></i>
+        <i class="fas fa-comments" aria-hidden="true"></i>
     </div>
 
     <div class="chat-window" id="chatWindow">
@@ -2933,13 +3072,16 @@
         const navLinks = document.querySelector('.nav-links');
         const pageHeader = document.querySelector('header');
         const themeToggle = document.getElementById('themeToggle');
+        const languageToggle = document.getElementById('languageToggle');
         const backToTop = document.getElementById('backToTop');
 
         if (localStorage.getItem('portfolio-theme') === 'dark') document.body.classList.add('dark-mode');
         function updateThemeButton() {
             const dark = document.body.classList.contains('dark-mode');
             themeToggle.innerHTML = dark ? '&#9728;' : '&#9790;';
-            themeToggle.setAttribute('aria-label', dark ? 'Enable light mode' : 'Enable dark mode');
+            themeToggle.setAttribute('aria-label', document.documentElement.lang === 'sw'
+                ? (dark ? 'Washa hali ya mwanga' : 'Washa hali ya giza')
+                : (dark ? 'Enable light mode' : 'Enable dark mode'));
         }
         updateThemeButton();
         themeToggle.addEventListener('click', () => {
@@ -2951,7 +3093,10 @@
         function setMobileMenu(open) {
             navLinks.classList.toggle('active', open);
             mobileMenu.setAttribute('aria-expanded', String(open));
-            mobileMenu.setAttribute('aria-label', open ? 'Close navigation menu' : 'Open navigation menu');
+            const swahili = document.documentElement.lang === 'sw';
+            mobileMenu.setAttribute('aria-label', swahili
+                ? (open ? 'Funga menyu' : 'Fungua menyu')
+                : (open ? 'Close navigation menu' : 'Open navigation menu'));
         }
 
         function updateHeaderStyle() {
@@ -2965,10 +3110,16 @@
 
         const navigationItems = document.querySelectorAll('.nav-links a');
         navigationItems[0].classList.add('active');
+        navigationItems[0].setAttribute('aria-current', 'location');
         const navSectionObserver = new IntersectionObserver(entries => {
             entries.forEach(entry => {
                 if (!entry.isIntersecting) return;
-                navigationItems.forEach(link => link.classList.toggle('active', link.getAttribute('href') === `#${entry.target.id}`));
+                navigationItems.forEach(link => {
+                    const active = link.getAttribute('href') === `#${entry.target.id}`;
+                    link.classList.toggle('active', active);
+                    if (active) link.setAttribute('aria-current', 'location');
+                    else link.removeAttribute('aria-current');
+                });
             });
         }, { rootMargin: '-30% 0px -60% 0px' });
         document.querySelectorAll('section[id]').forEach(section => navSectionObserver.observe(section));
@@ -2999,10 +3150,209 @@
         
         // Typing Effect
         const typingElement = document.getElementById('typing');
-        const professions = ['Software Engineer', 'Web Developer', 'IT Solutions Expert'];
+        const professionsByLanguage = {
+            en: ['Software Engineer', 'Web Developer', 'IT Solutions Expert'],
+            sw: ['Mhandisi wa Programu', 'Msanidi wa Tovuti', 'Mtaalamu wa TEHAMA']
+        };
+        let currentLanguage = localStorage.getItem('portfolio-language') === 'sw' ? 'sw' : 'en';
+        let professions = professionsByLanguage[currentLanguage];
         let professionIndex = 0;
         let charIndex = 0;
         let isDeleting = false;
+
+        const swahiliCopy = {
+            'Home': 'Nyumbani', 'About': 'Kuhusu', 'Skills': 'Ujuzi', 'Experience': 'Uzoefu',
+            'Projects': 'Miradi', 'Blog': 'Makala', 'Certificates': 'Vyeti', 'Contact': 'Mawasiliano',
+            'Transforming Ideas Into Digital Solutions': 'Kubadilisha Mawazo kuwa Suluhisho za Kidijitali',
+            "I'm a": 'Mimi ni',
+            'I create innovative web applications and digital experiences that solve real-world problems. With expertise in both frontend and backend technologies, I deliver high-quality solutions tailored to your needs.': 'Ninatengeneza mifumo ya wavuti na huduma za kidijitali zinazotatua changamoto halisi. Ujuzi wangu wa upande wa mbele na nyuma wa mifumo hunisaidia kutoa suluhisho bora kulingana na mahitaji yako.',
+            'Download CV': 'Pakua Wasifu', 'Hire Me': 'Niajiri', 'About Me': 'Kunihusu', '3+ Years Experience': 'Uzoefu wa Miaka 3+', 'AWS Certified': 'Nimeidhinishwa na AWS',
+            'Name:': 'Jina:', 'Role:': 'Cheo:', 'Location:': 'Mahali:', 'Email:': 'Barua pepe:', 'Full Stack Developer': 'Msanidi wa Mifumo Kamili',
+            'Enable dark mode': 'Washa hali ya giza', 'Enable light mode': 'Washa hali ya mwanga', 'Toggle color theme': 'Badili mwonekano wa rangi',
+            'Open AI Assistant': 'Fungua msaidizi wa kidijitali', 'Back to top': 'Rudi juu', 'Chat on WhatsApp': 'Wasiliana kupitia WhatsApp',
+            'Portrait of Luther Mwinuka': 'Picha ya Luther Mwinuka',
+            'RDOMMS rural development monitoring and management system': 'Mfumo wa RDOMMS wa ufuatiliaji na usimamizi wa maendeleo ya vijijini',
+            'KIUT fake review detection system': 'Mfumo wa KIUT wa kutambua tathmini bandia', 'Eventrix Campus event platform': 'Jukwaa la matukio la Eventrix Campus',
+            'RDOMMS monitoring and reporting system': 'Mfumo wa RDOMMS wa ufuatiliaji na utoaji wa ripoti', 'Fake review detection system': 'Mfumo wa kutambua tathmini bandia',
+            'IT Expert & Problem Solver': 'Mtaalamu wa TEHAMA na Mtatuzi wa Changamoto',
+            "I'm Luther — a Tanzanian IT expert who believes technology should make life simpler, not harder.": 'Mimi ni Luther, mtaalamu wa TEHAMA kutoka Tanzania ninayeamini kuwa teknolojia inapaswa kurahisisha maisha.',
+            "From maintaining hospital information systems to building monitoring platforms for development organizations, I've spent the last few years solving real-world problems with code, networks, and data. My toolkit includes PHP, JavaScript, Python, SQL, and a growing list of technologies — but what drives me most is the moment a system finally works for the people using it.": 'Kuanzia kutunza mifumo ya taarifa za hospitali hadi kujenga mifumo ya ufuatiliaji kwa mashirika ya maendeleo, nimetumia miaka ya karibuni kutatua changamoto kwa programu, mitandao na data. Natumia PHP, JavaScript, Python na SQL; kinachonipa hamasa zaidi ni kuona mfumo ukiwasaidia watu wanaoutumia.',
+            "I'm currently finishing my degree in Information Technology and always looking for the next challenge to sink my teeth into.": 'Ninakamilisha shahada yangu ya Teknolojia ya Habari na Mawasiliano na niko tayari kukabiliana na changamoto mpya.',
+            'My Skills': 'Ujuzi Wangu', 'Programming Languages': 'Lugha za Programu', 'Back-End & Database': 'Upande wa Nyuma na Hifadhidata', 'Tools & Others': 'Zana na Nyingine', 'Skills': 'Ujuzi', 'Certifications': 'Vyeti', 'Certificate': 'Cheti', 'PDF edition': 'Toleo la PDF',
+            'Network Administration & Configuration/Installation': 'Usimamizi, usanidi na usakinishaji wa mitandao',
+            'System Design & Development / System Analyst': 'Ubunifu na uundaji wa mifumo / uchambuzi wa mifumo',
+            'Hardware Maintenance & Installation': 'Matengenezo na usakinishaji wa vifaa',
+            'Software Installation & Computer Programming': 'Usakinishaji wa programu na uandishi wa programu',
+            'Cybersecurity Skills': 'Ujuzi wa usalama wa mtandao', 'Website Design & Development': 'Ubunifu na uundaji wa tovuti',
+            'Mobile Application Development': 'Uundaji wa programu za simu', 'Database Administration & Data Analysis': 'Usimamizi wa hifadhidata na uchanganuzi wa data',
+            'System Integration & API Management': 'Uunganishaji wa mifumo na usimamizi wa API', 'Operating Systems Administration': 'Usimamizi wa mifumo endeshi',
+            'User Training & Technical Support': 'Mafunzo kwa watumiaji na msaada wa kiufundi',
+            'Experience & Education': 'Uzoefu na Elimu', 'IT Support Officer · Mbeya City Council': 'Afisa Msaada wa TEHAMA · Halmashauri ya Jiji la Mbeya',
+            'ICT Technician · Rural Development Organization': 'Fundi wa TEHAMA · Rural Development Organization',
+            'IT Consultant · Mbeya Zonal Referral Hospital': 'Mshauri wa TEHAMA · Hospitali ya Rufaa ya Kanda ya Mbeya',
+            'Bachelor of Information Technology': 'Shahada ya Teknolojia ya Habari na Mawasiliano',
+            'Maintained computer systems and networks, supported staff, and improved the reliability and accessibility of ICT services.': 'Alitunza mifumo ya kompyuta na mitandao, alitoa msaada kwa wafanyakazi na kuboresha upatikanaji na uaminifu wa huduma za TEHAMA.',
+            'Developed and maintained the RDOMMS, supported data collection and reporting, troubleshot system issues, and trained users.': 'Alitengeneza na kutunza RDOMMS, kusaidia ukusanyaji wa data na ripoti, kutatua hitilafu za mifumo na kutoa mafunzo kwa watumiaji.',
+            'Supported computer systems and networks, hospital information systems, data backups, and staff training.': 'Alitoa msaada kwa kompyuta na mitandao, mifumo ya taarifa za hospitali, nakala rudufu za data na mafunzo kwa wafanyakazi.',
+            'Kampala International University, Dar es Salaam.': 'Kampala International University, Dar es Salaam.',
+            'Technical Certifications': 'Vyeti vya Kitaaluma',
+            'Continued training in networking, Python, data science, data analysis, databases, and critical infrastructure protection.': 'Mafunzo endelevu katika mitandao, Python, sayansi na uchanganuzi wa data, hifadhidata na ulinzi wa miundombinu muhimu.',
+            'My Projects': 'Miradi Yangu', 'All': 'Yote', 'Web Development': 'Utengenezaji wa Tovuti', 'Mobile Apps': 'Programu za Simu', 'UI/UX Design': 'Muundo wa UI/UX',
+            'Web Apps': 'Programu za Wavuti', 'APIs': 'APIs', 'Learning Projects': 'Miradi ya Kujifunza',
+            'A rural development organization monitoring and management system for tracking beneficiaries, projects, progress, and reports.': 'Mfumo wa ufuatiliaji na usimamizi wa miradi ya maendeleo ya vijijini unaofuatilia wanufaika, miradi, maendeleo na ripoti.',
+            'A fake review detection system that uses NLP and machine learning to classify academic reviews as genuine or fake.': 'Mfumo wa kutambua tathmini za kitaaluma zisizo za kweli kwa kutumia uchakataji wa lugha asilia na ujifunzaji wa mashine.',
+            'A campus event platform for publishing, registering, and tracking events through one unified dashboard.': 'Jukwaa la chuoni la kutangaza matukio, kupokea usajili na kufuatilia shughuli kupitia dashibodi moja.',
+            'PROJECT FOCUS': 'LENGO LA MRADI', 'CONTRIBUTION': 'MCHANGO', 'APPROACH': 'MBINU', 'CORE WORKFLOW': 'MTIRIRIKO MKUU',
+            'CORE FEATURES': 'VIPENGELE MUHIMU', 'ARCHITECTURE': 'MUUNDO WA MFUMO', 'SHOPPING TOOLS': 'ZANA ZA UNUNUZI', 'INTERFACE': 'KIOLESA',
+            'WORKFLOW': 'MTIRIRIKO WA KAZI', 'API OPERATIONS': 'SHUGHULI ZA API', 'VALIDATION': 'UTHIBITISHAJI', 'ERROR HANDLING': 'USHUGHULIKIAJI WA HITILAFU',
+            'STUDY FLOW': 'MTIRIRIKO WA KUJIFUNZA', 'PROJECT': 'MRADI', 'INTERACTION': 'MABADILIANO YA MTUMIAJI', 'PAGE SECTIONS': 'SEHEMU ZA UKURASA',
+            'NOTE': 'TAARIFA', 'LANGUAGE PIPELINE': 'UCHAKATAJI WA LUGHA', 'ANSWER MATCHING': 'ULINGANISHAJI WA MAJIBU', 'FEATURES': 'VIPENGELE', 'STACK': 'TEKNOLOJIA',
+            'Beneficiary records, project progress, and reporting workflows.': 'Rekodi za wanufaika, maendeleo ya miradi na utayarishaji wa ripoti.',
+            'System development, maintenance, data support, and user training.': 'Utengenezaji na utunzaji wa mfumo, msaada wa data na mafunzo ya watumiaji.',
+            'Classifying academic feedback to flag suspicious reviews.': 'Kuchanganua maoni ya kitaaluma ili kubaini tathmini zinazotiliwa shaka.',
+            'Natural language processing and machine learning.': 'Uchakataji wa lugha asilia na ujifunzaji wa mashine.',
+            'Campus event discovery, registration, and participation tracking.': 'Ugunduzi wa matukio ya chuoni, usajili na ufuatiliaji wa ushiriki.',
+            'Publish events and manage registrations from a shared dashboard.': 'Kutangaza matukio na kusimamia usajili kupitia dashibodi ya pamoja.',
+            'Browse Repositories': 'Tazama Repositori', 'View source': 'Tazama msimbo', 'Request Demo': 'Omba Demo', 'Live site': 'Tovuti mubashara', 'Latest Articles': 'Makala za Hivi Karibuni',
+            'Project details': 'Maelezo ya mradi',
+            'View the RDOMMS source repository on GitHub': 'Tazama repositori ya msimbo wa RDOMMS kwenye GitHub',
+            'View the KIUT Review Detector source repository on GitHub': 'Tazama repositori ya msimbo wa KIUT Review Detector kwenye GitHub',
+            'View the Eventrix source repository on GitHub': 'Tazama repositori ya msimbo wa Eventrix kwenye GitHub',
+            'View User Management Dashboard source repository on GitHub': 'Tazama repositori ya msimbo wa Dashibodi ya Usimamizi wa Watumiaji kwenye GitHub',
+            'View Modern E-Commerce Store source repository on GitHub': 'Tazama repositori ya msimbo wa Duka la Kisasa la Mtandaoni kwenye GitHub',
+            'View React Task Manager source repository on GitHub': 'Tazama repositori ya msimbo wa Kipangaji Kazi cha React kwenye GitHub',
+            'View User Management REST API source repository on GitHub': 'Tazama repositori ya msimbo wa REST API ya Usimamizi wa Watumiaji kwenye GitHub',
+            'View User Management REST API 2 source repository on GitHub': 'Tazama repositori ya msimbo wa REST API ya Usimamizi wa Watumiaji 2 kwenye GitHub',
+            'View Flashcard Quiz App source repository on GitHub': 'Tazama repositori ya msimbo wa Programu ya Maswali ya Kadi kwenye GitHub',
+            'View Random Quote Generator source repository on GitHub': 'Tazama repositori ya msimbo wa Kizalishaji cha Nukuu Nasibu kwenye GitHub',
+            'View Portfolio Template source repository on GitHub': 'Tazama repositori ya msimbo wa Kiolezo cha Portfolio kwenye GitHub',
+            'View Language Translation Tool source repository on GitHub': 'Tazama repositori ya msimbo wa Zana ya Tafsiri ya Lugha kwenye GitHub',
+            'View FAQ Chatbot source repository on GitHub': 'Tazama repositori ya msimbo wa Chatbot ya Maswali ya Mara kwa Mara kwenye GitHub',
+            'View Personal Portfolio Website source repository on GitHub': 'Tazama repositori ya msimbo wa Tovuti Binafsi ya Portfolio kwenye GitHub',
+            'Web Application': 'Programu ya Wavuti',
+            'A full-stack KIUT system that classifies academic reviews as genuine or fake using a Python machine-learning service.': 'Mfumo kamili wa KIUT unaotambua tathmini za kitaaluma za kweli au bandia kwa kutumia huduma ya Python ya ujifunzaji wa mashine.',
+            'User Management Dashboard': 'Dashibodi ya Usimamizi wa Watumiaji',
+            'A responsive user administration dashboard backed by a REST API and MySQL database.': 'Dashibodi inayobadilika ya usimamizi wa watumiaji inayotumia REST API na hifadhidata ya MySQL.',
+            'Search, pagination, CSV export, validation, and user CRUD.': 'Utafutaji, kurasa, utoaji wa CSV, uthibitishaji na usimamizi kamili wa data ya watumiaji.',
+            'React frontend connected to an Express API and MySQL.': 'Kiolesura cha React kilichounganishwa na Express API na MySQL.',
+            'Modern E-Commerce Store': 'Duka la Kisasa la Mtandaoni',
+            'A responsive storefront concept with a searchable, filterable product catalog and shopping interactions.': 'Muundo wa duka la mtandaoni unaobadilika wenye utafutaji, vichujio vya bidhaa na vitendo vya ununuzi.',
+            'Product search, category filters, sorting, cart counter, and wishlist.': 'Utafutaji wa bidhaa, vichujio vya kategoria, upangaji, kikapu na orodha ya matamanio.',
+            'Promotional landing page with responsive product catalog.': 'Ukurasa wa matangazo wenye katalogi ya bidhaa inayobadilika.',
+            'React Task Manager': 'Kipangaji Kazi cha React',
+            'A task manager for organizing work with status and priority controls, search, and saved progress.': 'Kipangaji cha kazi chenye hali na vipaumbele, utafutaji na hifadhi ya maendeleo.',
+            'Create, edit, complete, restore, and delete tasks.': 'Unda, hariri, kamilisha, rejesha na futa kazi.',
+            'Filter by status or priority and sort the task list.': 'Chuja kwa hali au kipaumbele na panga orodha ya kazi.',
+            'User Management REST API': 'REST API ya Usimamizi wa Watumiaji',
+            'A JSON API for user records with MySQL persistence, input checks, and consistent response handling.': 'API ya JSON ya rekodi za watumiaji yenye uhifadhi wa MySQL, ukaguzi wa ingizo na majibu yanayolingana.',
+            'Create, list, retrieve, update, and delete user records.': 'Unda, orodhesha, pata, sasisha na futa rekodi za watumiaji.',
+            'Checks required fields, email format, age, and duplicate email.': 'Hukagua sehemu zinazohitajika, muundo wa barua pepe, umri na barua pepe zilizojirudia.',
+            'User Management REST API 2': 'REST API ya Usimamizi wa Watumiaji 2',
+            'A second iteration of the user API, with SQL-backed CRUD operations and environment-based configuration.': 'Toleo jingine la API ya watumiaji lenye CRUD ya SQL na usanidi wa mazingira.',
+            'MySQL connection pool, parameterized queries, and JSON endpoints.': 'Muunganisho wa MySQL, maswali ya SQL yenye vigezo na miisho ya JSON.',
+            'Validation and consistent handling for malformed requests and routes.': 'Uthibitishaji na ushughulikiaji thabiti wa maombi au njia zenye hitilafu.',
+            'Flashcard Quiz App': 'Programu ya Maswali ya Kadi',
+            'A study tool with interactive question-and-answer cards, navigation, and simple customization.': 'Zana ya kujifunzia yenye kadi shirikishi za maswali na majibu, urambazaji na ubinafsishaji rahisi.',
+            'Review prompts and answers with controls to move through a quiz.': 'Pitia maswali na majibu kwa kutumia vidhibiti vya kusonga kwenye jaribio.',
+            'Built as an interactive CodeAlpha internship exercise.': 'Iliundwa kama zoezi shirikishi la mafunzo ya kazi ya CodeAlpha.',
+            'Random Quote Generator': 'Kizalishaji cha Nukuu Nasibu',
+            'A lightweight web project that presents a changing quote through a simple interactive interface.': 'Mradi mwepesi wa wavuti unaoonyesha nukuu zinazobadilika kupitia kiolesura shirikishi rahisi.',
+            'Generate and display quotes in the browser.': 'Tengeneza na onyesha nukuu kwenye kivinjari.',
+            'Small front-end exercise built with HTML, CSS, and JavaScript.': 'Zoezi dogo la kiolesura lililotengenezwa kwa HTML, CSS na JavaScript.',
+            'Portfolio Template': 'Kiolezo cha Portfolio',
+            'A responsive single-page portfolio template with profile, skills, project cards, and contact form sections.': 'Kiolezo cha portfolio cha ukurasa mmoja kinachobadilika chenye wasifu, ujuzi, kadi za miradi na fomu ya mawasiliano.',
+            'Introduction, skills, services, projects, and contact form.': 'Utangulizi, ujuzi, huduma, miradi na fomu ya mawasiliano.',
+            'Template repository; sample profile content is included.': 'Repositori ya kiolezo; ina maudhui ya mfano ya wasifu.',
+            'Language Translation Tool': 'Zana ya Tafsiri ya Lugha',
+            'A simple translation interface for working with text between multiple languages through translation APIs.': 'Kiolesura rahisi cha kutafsiri maandishi kati ya lugha mbalimbali kupitia API za tafsiri.',
+            'Enter text, choose languages, and request a translation.': 'Weka maandishi, chagua lugha na uombe tafsiri.',
+            'Built as a CodeAlpha internship project.': 'Iliundwa kama mradi wa mafunzo ya kazi ya CodeAlpha.',
+            'FAQ Chatbot': 'Chatbot ya Maswali ya Mara kwa Mara',
+            'A question-answer assistant that matches customer questions against an FAQ knowledge base.': 'Msaidizi wa maswali na majibu unaolinganishia maswali ya wateja na hifadhidata ya maswali ya mara kwa mara.',
+            'Text cleaning, tokenization, synonym mapping, and stemming.': 'Usafishaji wa maandishi, ugawaji wa tokeni, ulinganishaji wa visawe na upunguzaji wa maneno.',
+            'TF-IDF vectors ranked with cosine similarity.': 'Vekta za TF-IDF zilizopangwa kwa ulinganifu wa cosine.',
+            'Personal Portfolio Website': 'Tovuti Binafsi ya Portfolio',
+            'This portfolio site, with project showcases, professional profile, certificates, and a contact form.': 'Tovuti hii ya portfolio yenye miradi, wasifu wa kitaaluma, vyeti na fomu ya mawasiliano.',
+            'Projects, skills, experience, certificates, blog, and theme/language controls.': 'Miradi, ujuzi, uzoefu, vyeti, makala na vidhibiti vya mandhari/lugha.',
+            'HTML, CSS, JavaScript, and PHP-backed contact/API endpoints.': 'HTML, CSS, JavaScript na miisho ya mawasiliano/API inayotumia PHP.',
+            'Find the RDOMMS source repository on GitHub': 'Tafuta repositori ya msimbo wa RDOMMS kwenye GitHub',
+            'Find the KIUT Review Detector source repository on GitHub': 'Tafuta repositori ya msimbo wa KIUT Review Detector kwenye GitHub',
+            'Find the Eventrix Campus source repository on GitHub': 'Tafuta repositori ya msimbo wa Eventrix Campus kwenye GitHub',
+            'Certificates & Achievements': 'Vyeti na Mafanikio', 'Accomplishments': 'Mafanikio',
+            'Building Better Monitoring Systems for Development Projects': 'Kujenga Mifumo Bora ya Ufuatiliaji wa Miradi ya Maendeleo',
+            'How structured data, progress tracking, and clear reporting can help organizations make better project decisions.': 'Jinsi data iliyopangwa, ufuatiliaji wa maendeleo na ripoti zilizo wazi zinavyosaidia mashirika kufanya maamuzi bora.',
+            'Using AI to Detect Fake Reviews': 'Kutumia Akili Unde Kutambua Tathmini Bandia',
+            'A practical look at how natural language processing can support more trustworthy review and feedback platforms.': 'Jinsi uchakataji wa lugha asilia unavyoweza kusaidia majukwaa ya tathmini na maoni yanayoaminika zaidi.',
+            'Making Campus Events Easier to Discover': 'Kurahisisha Ugunduzi wa Matukio ya Chuoni',
+            'Why a focused event platform can improve communication, registration, and participation across a campus community.': 'Jinsi jukwaa maalum la matukio linavyoweza kuboresha mawasiliano, usajili na ushiriki chuoni.',
+            'Systems': 'Mifumo', 'AI & Data': 'Akili Unde na Data', 'Campus Tech': 'Teknolojia ya Chuoni',
+            'Get In Touch': 'Wasiliana Nami', 'Location': 'Mahali', 'Email': 'Barua pepe', 'Phone': 'Simu',
+            'START A CONVERSATION': 'ANZISHA MAZUNGUMZO', 'Send a message': 'Tuma ujumbe', 'Share a few details and I’ll get back to you.': 'Acha maelezo mafupi nami nitakujibu.',
+            'Your Name': 'Jina Lako', 'Your Email': 'Barua Pepe Yako', 'Subject': 'Mada', 'Your Message': 'Ujumbe Wako', 'Send Message': 'Tuma Ujumbe',
+            'IT expert & full stack developer building practical digital solutions.': 'Mtaalamu wa TEHAMA na msanidi wa mifumo kamili, ninayetengeneza suluhisho za kidijitali.',
+            'Quick Links': 'Viungo vya Haraka', 'Services': 'Huduma', 'Mobile Apps': 'Programu za Simu', 'Cloud Solutions': 'Suluhisho za Wingu', 'IT Consulting': 'Ushauri wa TEHAMA',
+            "Hello! I'm Luther's AI assistant. How can I help you today?": 'Habari! Mimi ni msaidizi wa kidijitali wa Luther. Nikusaidie vipi?',
+            'Type your message...': 'Andika ujumbe wako...',
+            'Thank you! Your message has been sent.': 'Asante! Ujumbe wako umetumwa.',
+            'Unable to send your message right now. Please try again later.': 'Ujumbe haukutumwa kwa sasa. Tafadhali jaribu tena baadaye.',
+            'Please wait a few minutes before sending another message.': 'Tafadhali subiri dakika chache kabla ya kutuma ujumbe mwingine.',
+            'Please enter a valid email address.': 'Tafadhali weka barua pepe sahihi.',
+            'Unable to send your message. Please email me directly.': 'Ujumbe haukutumwa. Tafadhali nitumie barua pepe moja kwa moja.',
+            'I’ll use your details only to respond to your message.': 'Nitatumia taarifa zako kukujibu kuhusu ujumbe huu pekee.'
+        };
+        const originalTextNodes = new WeakMap();
+        const originalAttributes = new WeakMap();
+        function applyLanguage(language) {
+            currentLanguage = language;
+            localStorage.setItem('portfolio-language', language);
+            document.documentElement.lang = language;
+            const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+            let textNode;
+            while ((textNode = walker.nextNode())) {
+                if (textNode.parentElement && ['SCRIPT', 'STYLE'].includes(textNode.parentElement.tagName)) continue;
+                if (!originalTextNodes.has(textNode)) originalTextNodes.set(textNode, textNode.nodeValue);
+                const original = originalTextNodes.get(textNode);
+                const phrase = original.trim();
+                if (!phrase) { textNode.nodeValue = original; continue; }
+                const phraseStart = original.indexOf(phrase);
+                const leading = original.slice(0, phraseStart);
+                const trailing = original.slice(phraseStart + phrase.length);
+                textNode.nodeValue = leading + (language === 'sw' ? (swahiliCopy[phrase] || phrase) : phrase) + trailing;
+            }
+            document.querySelectorAll('[aria-label], [title], [placeholder], img[alt]').forEach(element => {
+                if (!originalAttributes.has(element)) {
+                    originalAttributes.set(element, Object.fromEntries(['aria-label', 'title', 'placeholder', 'alt']
+                        .filter(attribute => element.hasAttribute(attribute))
+                        .map(attribute => [attribute, element.getAttribute(attribute)])));
+                }
+                Object.entries(originalAttributes.get(element)).forEach(([attribute, original]) => {
+                    element.setAttribute(attribute, language === 'sw' ? (swahiliCopy[original] || original) : original);
+                });
+            });
+            languageToggle.textContent = language === 'en' ? 'SW' : 'EN';
+            languageToggle.setAttribute('aria-label', language === 'en' ? 'Badili lugha iwe Kiswahili' : 'Switch language to English');
+            languageToggle.title = language === 'en' ? 'Badili lugha iwe Kiswahili' : 'Switch language to English';
+            document.querySelector('nav').setAttribute('aria-label', language === 'sw' ? 'Urambazaji mkuu' : 'Primary navigation');
+            updateThemeButton();
+            professions = professionsByLanguage[language];
+            professionIndex = 0;
+            charIndex = 0;
+            isDeleting = false;
+            typingElement.textContent = '';
+            document.title = language === 'sw' ? 'Luther Mwinuka | Mtaalamu wa TEHAMA na Msanidi wa Programu' : 'Luther Mwinuka | Full Stack Developer & IT Expert';
+            const metaDescription = document.querySelector('meta[name="description"]');
+            if (metaDescription) metaDescription.content = language === 'sw'
+                ? 'Portfolio ya Luther Mwinuka, mtaalamu wa TEHAMA na msanidi wa mifumo kamili kutoka Iringa, Tanzania.'
+                : 'Portfolio of Luther Mwinuka, a Full Stack Developer and IT Expert building reliable web applications and digital solutions.';
+            const ogDescription = document.querySelector('meta[property="og:description"]');
+            if (ogDescription) ogDescription.content = metaDescription.content;
+            const twitterDescription = document.querySelector('meta[name="twitter:description"]');
+            if (twitterDescription) twitterDescription.content = metaDescription.content;
+            const chatInput = document.getElementById('chatInput');
+            if (chatInput) chatInput.placeholder = language === 'sw' ? 'Andika ujumbe wako...' : 'Type your message...';
+        }
+        applyLanguage(currentLanguage);
+        languageToggle.addEventListener('click', () => applyLanguage(currentLanguage === 'en' ? 'sw' : 'en'));
         
         function type() {
             const currentProfession = professions[professionIndex];
@@ -3086,10 +3436,12 @@
                 }
 
                 contactForm.reset();
-                formStatus.textContent = result.message || 'Thank you! Your message has been sent.';
+                const successMessage = result.message || 'Thank you! Your message has been sent.';
+                formStatus.textContent = currentLanguage === 'sw' ? (swahiliCopy[successMessage] || successMessage) : successMessage;
                 formStatus.classList.add('success');
             } catch (error) {
-                formStatus.textContent = error.message || 'Unable to send your message. Please email me directly.';
+                const errorMessage = error.message || 'Unable to send your message. Please email me directly.';
+                formStatus.textContent = currentLanguage === 'sw' ? (swahiliCopy[errorMessage] || errorMessage) : errorMessage;
                 formStatus.classList.add('error');
             } finally {
                 submitBtn.textContent = originalText;
@@ -3133,25 +3485,49 @@
         // Project Filtering
         const filterBtns = document.querySelectorAll('.filter-btn');
         const projectCards = document.querySelectorAll('.project-card');
-        
+        const projectSearch = document.getElementById('projectSearch');
+        const projectResults = document.getElementById('projectResults');
+        let activeProjectFilter = 'all';
+
+        function updateProjects() {
+            const query = projectSearch.value.trim().toLocaleLowerCase();
+            let visibleCount = 0;
+            projectCards.forEach(card => {
+                const categoryMatches = activeProjectFilter === 'all' || card.dataset.category === activeProjectFilter;
+                const textMatches = !query || card.textContent.toLocaleLowerCase().includes(query);
+                const visible = categoryMatches && textMatches;
+                card.hidden = !visible;
+                if (visible) visibleCount++;
+            });
+            projectResults.textContent = currentLanguage === 'sw'
+                ? `${visibleCount} kati ya ${projectCards.length} miradi inaonekana`
+                : `${visibleCount} of ${projectCards.length} projects shown`;
+        }
+
         filterBtns.forEach(btn => {
             btn.addEventListener('click', () => {
-                // Remove active class from all buttons
-                filterBtns.forEach(b => b.classList.remove('active'));
-                // Add active class to clicked button
+                filterBtns.forEach(b => { b.classList.remove('active'); b.setAttribute('aria-pressed', 'false'); });
                 btn.classList.add('active');
-                
-                const filter = btn.getAttribute('data-filter');
-                
-                projectCards.forEach(card => {
-                    if (filter === 'all' || card.getAttribute('data-category') === filter) {
-                        card.style.display = 'block';
-                    } else {
-                        card.style.display = 'none';
-                    }
-                });
+                btn.setAttribute('aria-pressed', 'true');
+                activeProjectFilter = btn.dataset.filter;
+                updateProjects();
             });
         });
+
+        projectSearch.addEventListener('input', updateProjects);
+        document.addEventListener('keydown', event => {
+            if (event.key === '/' && !event.ctrlKey && !event.metaKey && !['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) {
+                event.preventDefault();
+                projectSearch.focus();
+                document.getElementById('projects').scrollIntoView({ behavior: 'smooth' });
+            }
+            if (event.key === 'Escape' && document.activeElement === projectSearch) {
+                projectSearch.value = '';
+                updateProjects();
+                projectSearch.blur();
+            }
+        });
+        updateProjects();
         
         // AI Chat Assistant
         const chatAssistant = document.getElementById('chatAssistant');
@@ -3374,7 +3750,7 @@
 
         // Add scroll animation to cards inside each section.
         function checkScroll() {
-            const elements = document.querySelectorAll('.skill-category, .project-card, .blog-card, .certificate-card, .contact-item');
+            const elements = document.querySelectorAll('.about-img, .about-text, .skill-category, .experience-item, .project-card, .blog-card, .certificate-card, .contact-info, .contact-form, .contact-item');
             
             elements.forEach(element => {
                 const elementTop = element.getBoundingClientRect().top;
@@ -3388,7 +3764,7 @@
         }
         
         // Initialize elements with initial styles for animation
-        document.querySelectorAll('.skill-category, .project-card, .blog-card, .certificate-card, .contact-item').forEach((element, index) => {
+        document.querySelectorAll('.about-img, .about-text, .skill-category, .experience-item, .project-card, .blog-card, .certificate-card, .contact-info, .contact-form, .contact-item').forEach((element, index) => {
             if (reducedMotion) {
                 element.style.opacity = '1';
                 return;
@@ -3396,9 +3772,7 @@
             element.style.opacity = '0';
             element.style.transform = 'translateY(20px)';
             element.style.transition = 'opacity 0.6s ease, transform 0.6s cubic-bezier(.2,.7,.2,1)';
-            if (element.classList.contains('contact-item')) {
-                element.style.transitionDelay = `${(index % 4) * 90}ms`;
-            }
+            element.style.transitionDelay = `${(index % 4) * 75}ms`;
         });
 
         document.querySelectorAll('.certificate-card').forEach((card, index) => {
