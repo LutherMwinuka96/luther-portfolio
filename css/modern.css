@@ -116,6 +116,7 @@ section:not(.hero) { padding-top: clamp(72px, 8vw, 108px); padding-bottom: clamp
 .project-card:hover img, .blog-card:hover img { transform: scale(1.045); }
 .projects-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; }
 .project-card { display: flex; min-width: 0; flex-direction: column; }
+.project-card[hidden] { display: none !important; }
 .project-img { height: 142px; }
 .project-card .project-content { display: flex; flex: 1; min-width: 0; flex-direction: column; padding: 16px; }
 .project-content h3 { margin-bottom: 7px; font-size: 1.08rem; line-height: 1.3; }
