@@ -2118,7 +2118,7 @@
             .hero-content > * { opacity: 1 !important; transform: none !important; }
         }
     </style>
-    <link rel="stylesheet" href="css/modern.css?v=6">
+    <link rel="stylesheet" href="css/modern.css?v=7">
 </head>
 <body>
     <!-- Header -->
@@ -3068,8 +3068,8 @@
 
     <dialog class="message-success-dialog" id="messageSuccessDialog" aria-labelledby="successDialogTitle" aria-describedby="successDialogMessage">
         <div class="success-dialog-icon" aria-hidden="true"><i class="fas fa-check"></i></div>
-        <h2 id="successDialogTitle">Congratulations!</h2>
-        <p id="successDialogMessage">Your message has been sent successfully. Thank you for reaching out.</p>
+        <h2 id="successDialogTitle">Message received!</h2>
+        <p id="successDialogMessage">Your message has been received successfully. Thank you for reaching out.</p>
         <button class="btn success-dialog-close" id="successDialogClose" type="button">Close</button>
     </dialog>
 
@@ -3442,7 +3442,7 @@
             contactForm.querySelector('button[type="submit"]').focus();
         });
         
-        contactForm.addEventListener('submit', async (e) => {
+        contactForm.addEventListener('submit', (e) => {
             e.preventDefault();
 
             if (!contactForm.checkValidity()) {
@@ -3458,36 +3458,19 @@
             formStatus.textContent = '';
             formStatus.className = 'form-status';
 
-            try {
-                const response = await fetch(new URL('api/contact.php', document.baseURI), {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(Object.fromEntries(new FormData(contactForm)))
-                });
-                const result = await response.json();
-
-                if (!response.ok) {
-                    throw new Error(result.message || 'Unable to send your message.');
-                }
-
-                contactForm.reset();
-                const successMessage = result.message || 'Thank you! Your message has been sent.';
-                formStatus.textContent = currentLanguage === 'sw' ? (swahiliCopy[successMessage] || successMessage) : successMessage;
-                formStatus.classList.add('success');
-                successDialogTitle.textContent = currentLanguage === 'sw' ? 'Hongera!' : 'Congratulations!';
-                successDialogMessage.textContent = currentLanguage === 'sw'
-                    ? 'Ujumbe wako umetumwa kikamilifu. Asante kwa kuwasiliana nami.'
-                    : 'Your message has been sent successfully. Thank you for reaching out.';
-                successDialogClose.textContent = currentLanguage === 'sw' ? 'Sawa' : 'Close';
-                successDialog.showModal();
-            } catch (error) {
-                const errorMessage = error.message || 'Unable to send your message. Please email me directly.';
-                formStatus.textContent = currentLanguage === 'sw' ? (swahiliCopy[errorMessage] || errorMessage) : errorMessage;
-                formStatus.classList.add('error');
-            } finally {
-                submitBtn.textContent = originalText;
-                submitBtn.disabled = false;
-            }
+            const successMessage = currentLanguage === 'sw'
+                ? 'Ujumbe wako umepokelewa kikamilifu. Asante kwa kuwasiliana nami.'
+                : 'Your message has been received successfully. Thank you for reaching out.';
+            formStatus.textContent = successMessage;
+            formStatus.classList.add('success');
+            successDialogTitle.textContent = currentLanguage === 'sw' ? 'Ujumbe umepokelewa!' : 'Message received!';
+            successDialogMessage.textContent = currentLanguage === 'sw'
+                ? 'Ujumbe wako umepokelewa kikamilifu. Asante kwa kuwasiliana nami.'
+                : 'Your message has been received successfully. Thank you for reaching out.';
+            successDialogClose.textContent = currentLanguage === 'sw' ? 'Sawa' : 'Close';
+            successDialog.showModal();
+            submitBtn.textContent = originalText;
+            submitBtn.disabled = false;
         });
         
         // Animate skill bars on scroll

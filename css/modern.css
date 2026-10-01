@@ -352,6 +352,20 @@ header.scrolled, .dark-mode header.scrolled {
 .social-link:hover i { color: #d4ef6b !important; transform: scale(1.13); }
 .section-title::before { display: none !important; content: none !important; }
 
+/* Keep the Skills cards and their text within narrow phone screens. */
+@media (max-width: 760px) {
+    #skills .skills-container { grid-template-columns: minmax(0, 1fr); gap: 18px; }
+    #skills .skill-category, #skills .skills-brief { min-width: 0; padding: 22px; }
+    #skills .skill-category h3 { font-size: clamp(1.1rem, 4.6vw, 1.4rem); }
+    #skills .skill-info { min-width: 0; gap: 12px; }
+    #skills .skill-info span:first-child { min-width: 0; overflow-wrap: anywhere; }
+    #skills .skill-info span:last-child { flex: 0 0 auto; }
+}
+@media (max-width: 480px) {
+    #skills .skills-brief ul { column-count: 1; column-gap: 0; padding-left: 20px; }
+    #skills .skill-category, #skills .skills-brief { padding: 19px; }
+}
+
 /* A quieter, clearer footer with consistent spacing and readable link groups. */
 footer {
     padding: 54px 0 20px;
